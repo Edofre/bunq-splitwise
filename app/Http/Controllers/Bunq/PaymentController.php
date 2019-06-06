@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Bunq;
 
 /**
  * Class PaymentController
- * @package App\Http\Controllers
+ * @package App\Http\Controllers\Bunq
  */
 class PaymentController extends Controller
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Bunq;
 
 /**
  * Class UserController
- * @package App\Http\Controllers
+ * @package App\Http\Controllers\Bunq
  */
 class UserController extends Controller
 {
