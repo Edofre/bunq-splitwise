@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Bunq;
 
+use bunq\Model\Generated\Endpoint\MonetaryAccount;
+
 /**
  * Class MonetaryAccountController
  * @package App\Http\Controllers\Bunq
@@ -14,19 +16,26 @@ class MonetaryAccountController extends Controller
      */
     public function __construct()
     {
-        //
-    }
-
-    public function index($userId) {
-        // /user/{userID}/monetary-account
+        parent::__construct();
     }
 
     /**
-     * @param $userId
+     *
      */
-    public function show($userId, $itemId)
+    public function index()
     {
-        // /user/{userID}/monetary-account/{itemId}
+        $monetaryAccountList = collect(MonetaryAccount::listing()->getValue());
+        return $monetaryAccountList->toJson();
+    }
+
+    /**
+     * @param $itemId
+     * @return string
+     */
+    public function show($itemId)
+    {
+        $monetaryAccount = collect(MonetaryAccount::get($itemId)->getValue());
+        return $monetaryAccount->toJson();
     }
 
 }

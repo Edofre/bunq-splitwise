@@ -17,11 +17,8 @@ $router->get('/', function () use ($router) {
 
 $router->group(['prefix' => 'bunq'], function () use ($router) {
 
-    $router->get('/users', ['uses' => 'Bunq\UserController@index']);
-    $router->get('/users/{itemId}', ['uses' => 'Bunq\UserController@show']);
-
-    $router->get('/users/{userId}/monetary-accounts', ['uses' => 'Bunq\MonetaryAccountController@index']);
-    $router->get('/users/{userId}/monetary-accounts/{itemId}', ['uses' => 'Bunq\MonetaryAccountController@show']);
+    $router->get('/monetary-accounts', ['uses' => 'Bunq\MonetaryAccountController@index']);
+    $router->get('/monetary-accounts/{itemId}', ['uses' => 'Bunq\MonetaryAccountController@show']);
 
     $router->get('/week/{week}/{year}', ['uses' => 'Bunq\PaymentController@week']);
     $router->get('/month/{month}/{year}', ['uses' => 'Bunq\PaymentController@month']);
