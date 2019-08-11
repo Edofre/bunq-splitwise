@@ -24,11 +24,10 @@ $router->group(['prefix' => 'bunq'], function () use ($router) {
     $router->get('/redirect', ['uses' => 'Bunq\AuthController@processRedirect']);
     $router->get('/token', ['uses' => 'Bunq\AuthController@token']);
 
-
     $router->get('/monetary-accounts', ['uses' => 'Bunq\MonetaryAccountController@index']);
     $router->get('/monetary-accounts/{itemId}', ['uses' => 'Bunq\MonetaryAccountController@show']);
 
-    $router->get('/payments/week/{week}/{year}', ['uses' => 'Bunq\PaymentController@week']);
-    $router->get('/payments/month/{month}/{year}', ['uses' => 'Bunq\PaymentController@month']);
+    $router->get('/payments/{account}/week/{week}/{year}', ['uses' => 'Bunq\PaymentController@week']);
+    $router->get('/payments/{account}/month/{month}/{year}', ['uses' => 'Bunq\PaymentController@month']);
 });
 
