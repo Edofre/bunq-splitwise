@@ -82,6 +82,15 @@ $app->register(App\Providers\AppServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
+| Register custom configuration files
+|--------------------------------------------------------------------------
+| Here we can register our own custom configuration files
+|
+*/
+$app->configure('bunq');
+
+/*
+|--------------------------------------------------------------------------
 | Load The Application Routes
 |--------------------------------------------------------------------------
 |

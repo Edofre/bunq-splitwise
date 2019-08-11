@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Bunq;
 
+use bunq\Model\Generated\Endpoint\Payment;
+
 /**
  * Class PaymentController
  * @package App\Http\Controllers\Bunq
@@ -23,7 +25,13 @@ class PaymentController extends Controller
      */
     public function week($week, $year)
     {
-        // /user/{userID}/monetary-account/{monetary-accountID}/payment
+
+        $payments = Payment::listing(24290);
+
+        var_dump($payments);
+        exit;
+
+
         var_dump($week, $year);
     }
 

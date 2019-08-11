@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "e6cb7670a4522401af2fd25d109ff045",
+    "content-hash": "4ad988328cc229c97b659e815472d38c",
     "packages": [
         {
             "name": "bunq/sdk_php",
