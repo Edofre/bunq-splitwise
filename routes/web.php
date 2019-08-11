@@ -12,14 +12,11 @@
 */
 
 $router->get('/', function () use ($router) {
-    return $router->app->version();
+    return $router->app->version(); // Lumen default, show readme?
 });
 
-//$router->group(['prefix' => ''])
-
 $router->group(['prefix' => 'bunq'], function () use ($router) {
-
-    // Oath2
+    // OAuth
     $router->get('/oauth', ['uses' => 'Bunq\AuthController@oauth']);
     $router->get('/redirect', ['uses' => 'Bunq\AuthController@processRedirect']);
     $router->get('/token', ['uses' => 'Bunq\AuthController@token']);
@@ -29,5 +26,15 @@ $router->group(['prefix' => 'bunq'], function () use ($router) {
 
     $router->get('/payments/{account}/week/{week}/{year}', ['uses' => 'Bunq\PaymentController@week']);
     $router->get('/payments/{account}/month/{month}/{year}', ['uses' => 'Bunq\PaymentController@month']);
+});
+
+$router->group(['prefix' => 'splitwise'], function () use ($router) {
+    // OAuth
+    $router->get('/oauth', ['uses' => 'Splitwise\AuthController@oauth']);
+    $router->get('/redirect', ['uses' => 'Splitwise\AuthController@processRedirect']);
+    $router->get('/token', ['uses' => 'Splitwise\AuthController@token']);
+
+    // User
+    $router->get('/users/current', ['uses' => 'Splitwise\UserController@current']);
 });
 

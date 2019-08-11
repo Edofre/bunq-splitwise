@@ -88,6 +88,7 @@ $app->register(App\Providers\AppServiceProvider::class);
 |
 */
 $app->configure('bunq');
+$app->configure('splitwise');
 
 /*
 |--------------------------------------------------------------------------
