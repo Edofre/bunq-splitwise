@@ -23,6 +23,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $user = auth()->user();
+
+        return view('home')->with([
+            'bunqToken' => $user->bunq_token,
+            'splitwiseToken' => $user->splitwise_token,
+        ]);
     }
 }

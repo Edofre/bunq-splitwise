@@ -39,9 +39,8 @@ class AuthController extends Controller
      */
     public function oauth()
     {
-        //        var_dump(config('bunq.oauth.url'));
+        dd('not implemented currently');
         //        var_dump('w');
-        $test = 'BKJdiCrzTDVhiMlbHZxlWVlp';
 
         $query = http_build_query([
             'response_type' => 'code',

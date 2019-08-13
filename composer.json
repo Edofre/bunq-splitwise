@@ -12,6 +12,7 @@
     "bunq/sdk_php": "^1.10",
     "fideloper/proxy": "^4.0",
     "guzzlehttp/guzzle": "~6.0",
+    "laracasts/flash": "^3.0",
     "laravel/framework": "5.8.*",
     "laravel/tinker": "^1.0"
   },
