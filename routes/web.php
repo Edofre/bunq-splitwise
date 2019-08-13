@@ -21,7 +21,7 @@ Route::group(['middleware' => ['auth'],], function () {
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::group(['prefix' => 'bunq', 'as' => 'bunq.'], function () {
-        // OAuth
+        // OAuth (not used for now, using api context)
         Route::get('/oauth', ['uses' => 'Bunq\AuthController@oauth']);
         Route::get('/redirect', ['uses' => 'Bunq\AuthController@processRedirect']);
         Route::get('/token', ['uses' => 'Bunq\AuthController@token']);
