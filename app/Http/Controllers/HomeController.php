@@ -26,7 +26,7 @@ class HomeController extends Controller
         $user = auth()->user();
 
         return view('home')->with([
-            'bunqToken' => $user->bunq_token,
+            'bunqToken'      => $user->bunq_token,
             'splitwiseToken' => $user->splitwise_token,
         ]);
     }

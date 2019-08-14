@@ -13,8 +13,8 @@ class AddSplitwiseBunqTokensToUsers extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('bunq_token')->nullable()->after('remember_token');
-            $table->string('splitwise_token')->nullable()->after('bunq_token');
+            $table->text('bunq_token')->nullable()->after('remember_token');
+            $table->text('splitwise_token')->nullable()->after('bunq_token');
         });
     }
 

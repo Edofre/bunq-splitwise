@@ -55,22 +55,46 @@ class AuthController extends Controller
     public function processRedirect(Request $request)
     {
         $error = $request->get('error', false);
+        $code = $request->get('code');
 
         if ($error !== false) {
             flash(__('splitwise.flash_oauth_error', ['error' => $error]))->error();
             return redirect()->to('home');
         }
 
-        // Update the encrypted token in the user
-        $user = auth()->user();
-        $user->update([
-            'splitwise_token' => encrypt($request->get('code')),
+
+        $client = new GuzzleClient();
+        $query = http_build_query([
+            'grant_type'    => 'authorization_code',
+            'code'          => $request->get('code'),
+            'redirect_uri'  => config('splitwise.oauth.redirect_uri'),
+            'client_id'     => config('splitwise.oauth.client_id'),
+            'client_secret' => config('splitwise.oauth.client_secret'),
         ]);
 
-        flash(__('splitwise.flash_successfully_connected'))->success();
+        $response = $client->post(config('splitwise.oauth.token_uri') . '?' . $query);
+
+        $response = json_decode($response->getBody()->getContents());
+
+        if ($response !== false) {
+
+            // Update the encrypted token in the user
+            $user = auth()->user();
+            $user->update([
+                'splitwise_token' => encrypt($response->access_token),
+            ]);
+
+            flash(__('splitwise.flash_successfully_connected'))->success();
+        } else {
+            flash(__('splitwise.flash_could_not_connect'))->error();
+        }
+
         return redirect()->to('home');
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function disconnect()
     {
         // Update the encrypted token in the user
@@ -81,27 +105,5 @@ class AuthController extends Controller
 
         flash(__('splitwise.flash_successfully_disconnected'))->success();
         return redirect()->to('home');
-    }
-
-    /**
-     *
-     */
-    public function token()
-    {
-        $client = new GuzzleClient();
-
-        $query = http_build_query([
-            'grant_type'    => 'authorization_code',
-            'code'          => env('SPLITWISE_CODE'), // Will be fixed later
-            'redirect_uri'  => config('splitwise.oauth.redirect_uri'),
-            'client_id'     => config('splitwise.oauth.client_id'),
-            'client_secret' => config('splitwise.oauth.client_secret'),
-        ]);
-
-        $response = $client->post(config('splitwise.oauth.token_uri') . '?' . $query);
-
-        $response = collect($response->getBody()->getContents());
-        var_dump($response);
-        exit;
     }
 }

@@ -15,41 +15,44 @@
                         @endif
 
                         <div class="col-sm-12 row">
-                            @if(is_null($bunqToken))
-                                <div class="col-sm-6">
+                            <div class="col-sm-6">
+                                @if(is_null($bunqToken))
                                     <a href="{{ route('bunq.oauth.authorize') }}" class="btn btn-primary">
                                         <i class="fas fa-piggy-bank"></i>
                                         Authorize bunq
                                     </a>
-                                </div>
-                            @else
+                                @else
+                                    Connected!
+                                @endif
+                            </div>
 
-                            @endif
-
-                            @if(is_null($splitwiseToken))
-                                <div class="col-sm-6">
+                            <div class="col-sm-6">
+                                @if(is_null($splitwiseToken))
                                     <a href="{{ route('splitwise.oauth.authorize') }}" class="btn btn-primary">
                                         <i class="fas fa-money-check-alt"></i>
                                         {{ __('splitwise.authorize_splitwise') }}
                                     </a>
-                                </div>
-                            @else
+                                @else
+                                    <div data-splitwise-disconnect-button class="btn btn-success">
+                                        <i class="fa fa-check" aria-hidden="true"></i>
+                                        {{ __('splitwise.splitwise_connected') }}
+                                    </div>
 
-                                <div data-splitwise-disconnect-button class="btn btn-success">
-                                    <i class="fa fa-check" aria-hidden="true"></i>
-                                    {{ __('splitwise.splitwise_connected') }}
-                                </div>
+                                    <div data-splitwise-disconnect-confirm style="display: none;">
+                                        <a class="btn btn-danger" href="{{ route('splitwise.oauth.disconnect') }}" onclick="event.preventDefault(); document.getElementById('splitwise-disconnect-form').submit();">
+                                            <i class="fa fa-times" aria-hidden="true"></i>
+                                            {{ __('splitwise.disconnect_splitwise') }}
+                                        </a>
+                                        <form id="splitwise-disconnect-form" action="{{ route('splitwise.oauth.disconnect') }}" method="POST" style="display: none;">
+                                            @csrf
+                                        </form>
+                                    </div>
 
-                                <div data-splitwise-disconnect-confirm style="display: none;">
-                                    <a class="btn btn-danger" href="{{ route('splitwise.oauth.disconnect') }}" onclick="event.preventDefault(); document.getElementById('splitwise-disconnect-form').submit();">
-                                        <i class="fa fa-cross" aria-hidden="true"></i>
-                                        {{ __('splitwise.disconnect_splitwise') }}
-                                    </a>
-                                    <form id="splitwise-disconnect-form" action="{{ route('splitwise.oauth.disconnect') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            @endif
+                                    <ul>
+                                        <li><a href="{{ route('splitwise.users.current') }}">{{ __('splitwise.show_current_user') }}</li>
+                                    </ul>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
