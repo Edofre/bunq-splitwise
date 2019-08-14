@@ -12,6 +12,11 @@
 */
 
 Route::get('/', function () {
+
+    if (!auth()->guest()) {
+        return redirect()->to('home');
+    }
+
     return view('welcome');
 });
 
@@ -51,8 +56,6 @@ Route::group(['middleware' => ['auth'],], function () {
             ->name('oauth.authorize');
         Route::get('/redirect', 'Splitwise\AuthController@processRedirect')
             ->name('oauth.redirect');
-        Route::get('/token', 'Splitwise\AuthController@token')
-            ->name('oauth.token');
         Route::post('/oauth', 'Splitwise\AuthController@disconnect')
             ->name('oauth.disconnect');
 
