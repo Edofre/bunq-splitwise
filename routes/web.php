@@ -62,6 +62,8 @@ Route::group(['middleware' => ['auth'],], function () {
         // Friends
         Route::get('/friends/list', 'Splitwise\FriendController@list')
             ->name('friends.list');
+        Route::get('/friends/{id}', 'Splitwise\FriendController@show')
+            ->name('friends.show');
 
         // Groups
         Route::get('/groups/list', 'Splitwise\GroupController@list')

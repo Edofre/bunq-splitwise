@@ -8,17 +8,19 @@
                     <div class="card-header">{{ __('splitwise.friends') }}</div>
 
                     <div class="card-body">
-                        @foreach($friends as $friend)
+                        @forelse($friends as $friend)
                             <div class="media">
                                 <img src="{{ $friend->picture->medium }}" class="mr-3" alt="{{ $friend->first_name }}">
                                 <div class="media-body">
                                     <h5 class="mt-0">
-                                        <a href="">{{ $friend->email }}</a>
+                                        <a href="{{ route('splitwise.friends.show', ['id' => $friend->id]) }}">{{ $friend->email }}</a>
                                     </h5>
                                     @price($friend->balance[0]->amount)
                                 </div>
                             </div>
-                        @endforeach
+                        @empty
+                            {{ __('splitwise.no_friends_found') }}
+                        @endforelse
                     </div>
                 </div>
             </div>

@@ -24,8 +24,6 @@ class FriendController extends Controller
      */
     public function list()
     {
-        $friends = collect();
-
         try {
             $client = new GuzzleClient([
                 'base_uri' => config('splitwise.base_uri'),
@@ -38,14 +36,40 @@ class FriendController extends Controller
             ]);
 
             $response = $response->getBody()->getContents();
-            $friends = collect(json_decode($response)->friends);
 
+            return view('splitwise.friends.list')->with([
+                'friends' => collect(json_decode($response)->friends),
+            ]);
         } catch (\Exception $exception) {
             abort(500, $exception->getMessage());
         }
+    }
 
-        return view('splitwise.friends.list')->with([
-            'friends' => $friends,
-        ]);
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show($id)
+    {
+        try {
+            $client = new GuzzleClient([
+                'base_uri' => config('splitwise.base_uri'),
+            ]);
+
+            $response = $client->post("get_friend/{$id}", [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . decrypt(auth()->user()->splitwise_token),
+                ],
+            ]);
+            $response = $response->getBody()->getContents();
+
+            return view('splitwise.friends.show')->with([
+                'friend' => json_decode($response)->friend,
+            ]);
+
+        } catch (\Exception $exception) {
+            abort(404, __('splitwise.friend_not_found'));
+        }
+
     }
 }

@@ -21,6 +21,7 @@ return [
     // Friends
     'show_friends'                    => 'Show friends',
     'friends'                         => 'Friends',
+    'no_friends_found'                => 'No friends found :(',
 
     // Groups
     'show_groups'                     => 'Show groups',
