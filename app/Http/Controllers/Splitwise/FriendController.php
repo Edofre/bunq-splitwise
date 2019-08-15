@@ -20,22 +20,32 @@ class FriendController extends Controller
     }
 
     /**
-     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function list()
     {
-        $client = new GuzzleClient([
-            'base_uri' => config('splitwise.base_uri'),
-        ]);
+        $friends = collect();
 
-        $response = $client->post('get_friends', [
-            'headers' => [
-                'Authorization' => 'Bearer ' . decrypt(auth()->user()->splitwise_token),
-            ],
-        ]);
+        try {
+            $client = new GuzzleClient([
+                'base_uri' => config('splitwise.base_uri'),
+            ]);
 
-        $response = $response->getBody()->getContents();
-        var_dump(json_decode($response));
-        exit;
+            $response = $client->post('get_friends', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . decrypt(auth()->user()->splitwise_token),
+                ],
+            ]);
+
+            $response = $response->getBody()->getContents();
+            $friends = collect(json_decode($response)->friends);
+
+        } catch (\Exception $exception) {
+            abort(500, $exception->getMessage());
+        }
+
+        return view('splitwise.friends.list')->with([
+            'friends' => $friends,
+        ]);
     }
 }

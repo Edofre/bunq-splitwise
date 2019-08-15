@@ -27,6 +27,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->addBladeDirectives();
+    }
+
+    /**
+     *
+     */
+    private function addBladeDirectives()
+    {
+        // Add a blade formatter for price attributes
+        \Blade::directive('price', function ($expression) {
+            return "<?= \"&euro; \" . number_format($expression, 2, ',', '.') ?>";
+        });
+
     }
 }

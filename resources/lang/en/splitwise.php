@@ -20,6 +20,7 @@ return [
 
     // Friends
     'show_friends'                    => 'Show friends',
+    'friends'                         => 'Friends',
 
     // Groups
     'show_groups'                     => 'Show groups',
