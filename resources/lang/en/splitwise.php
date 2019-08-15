@@ -18,7 +18,10 @@ return [
     // Errors
     'no_code_set'                     => 'No code set',
 
-    // Current user
+    // Groups
+    'show_groups'                     => 'Show groups',
+
+    // User
     'show_current_user'               => 'Show current user',
 
     // Flash messages
