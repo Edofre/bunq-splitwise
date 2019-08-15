@@ -18,6 +18,9 @@ return [
     // Errors
     'no_code_set'                     => 'No code set',
 
+    // Friends
+    'show_friends'                    => 'Show friends',
+
     // Groups
     'show_groups'                     => 'Show groups',
 

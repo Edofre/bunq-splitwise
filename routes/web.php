@@ -59,6 +59,10 @@ Route::group(['middleware' => ['auth'],], function () {
         Route::post('/oauth', 'Splitwise\AuthController@disconnect')
             ->name('oauth.disconnect');
 
+        // Friends
+        Route::get('/friends/list', 'Splitwise\FriendController@list')
+            ->name('friends.list');
+
         // Groups
         Route::get('/groups/list', 'Splitwise\GroupController@list')
             ->name('groups.list');
