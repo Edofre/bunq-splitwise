@@ -8,6 +8,9 @@
 
 return [
 
+    // API key for api context
+    'api_key' => env('BUNQ_API_KEY'),
+
     'oauth' => [
         // API details
         'authorize_uri' => 'https://oauth.bunq.com/auth',
@@ -18,4 +21,5 @@ return [
         'client_id'     => env('BUNQ_CLIENT_ID'),
         'client_secret' => env('BUNQ_CLIENT_SECRET'),
     ],
+
 ];

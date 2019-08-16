@@ -22,7 +22,7 @@ class AuthController extends Controller
     public function __construct()
     {
         // Don't instantiate bunq api context, we're using oauth2 here
-        parent::__construct();
+        // parent::__construct();
 
         // Make sure oauth configuration is set
         foreach ([

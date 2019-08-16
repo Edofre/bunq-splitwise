@@ -23,19 +23,22 @@ Route::get('/', function () {
 // Authorization routes
 Auth::routes();
 
-Route::group(['middleware' => ['auth'],], function () {
+Route::group(['middleware' => ['auth']], function () {
 
     // Home
     Route::get('/home', 'HomeController@index')->name('home');
 
     Route::group(['prefix' => 'bunq', 'as' => 'bunq.'], function () {
-        // OAuth (not used for now, using api context)
+        // OAuth
         Route::get('/oauth', 'Bunq\AuthController@oauth')
             ->name('oauth.authorize');
         Route::get('/redirect', 'Bunq\AuthController@processRedirect')
             ->name('oauth.redirect');
         Route::post('/oauth', 'Bunq\AuthController@disconnect')
             ->name('oauth.disconnect');
+
+        Route::get('/api-context', 'Bunq\ApiContextController@create')
+            ->name('api-context');
 
         // Monetary accounts
         Route::get('/monetary-accounts', 'Bunq\MonetaryAccountController@list')
