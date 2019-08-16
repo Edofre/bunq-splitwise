@@ -38,8 +38,8 @@ Route::group(['middleware' => ['auth'],], function () {
             ->name('oauth.token');
 
         // Monetary accounts
-        Route::get('/monetary-accounts', 'Bunq\MonetaryAccountController@index')
-            ->name('monetary-accounts.index');
+        Route::get('/monetary-accounts', 'Bunq\MonetaryAccountController@list')
+            ->name('monetary-accounts.list');
         Route::get('/monetary-accounts/{itemId}', 'Bunq\MonetaryAccountController@show')
             ->name('monetary-accounts.show');
 

@@ -20,10 +20,16 @@
                                     <div class="card-header">Bunq</div>
                                     <div class="card-body">
                                         @if(is_null($bunqToken))
-                                            <a href="{{ route('bunq.oauth.authorize') }}" class="btn btn-primary">
+                                            {{-- For now we're using the api context & not oauth   --}}
+                                            <a disabled="disabled" href="{{ route('bunq.oauth.authorize') }}" class="btn btn-primary disabled">
                                                 <i class="fas fa-piggy-bank"></i>
                                                 Authorize bunq
                                             </a>
+
+                                            <ul class="mt-3">
+                                                <li><a href="{{ route('bunq.monetary-accounts.list') }}">{{ __('bunq.monetary_accounts') }}</a></li>
+                                            </ul>
+
                                         @else
                                             Connected!
                                         @endif

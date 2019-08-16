@@ -11,18 +11,9 @@ use bunq\Model\Generated\Endpoint\MonetaryAccount;
 class MonetaryAccountController extends Controller
 {
     /**
-     * Create a new controller instance.
-     * @return void
-     */
-    public function __construct()
-    {
-        parent::__construct();
-    }
-
-    /**
      *
      */
-    public function index()
+    public function list()
     {
         $monetaryAccountList = collect(MonetaryAccount::listing()->getValue());
         return $monetaryAccountList->toJson();
