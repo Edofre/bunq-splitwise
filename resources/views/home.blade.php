@@ -20,18 +20,31 @@
                                     <div class="card-header">Bunq</div>
                                     <div class="card-body">
                                         @if(is_null($bunqToken))
-                                            {{-- For now we're using the api context & not oauth   --}}
-                                            <a disabled="disabled" href="{{ route('bunq.oauth.authorize') }}" class="btn btn-primary disabled">
+                                            <a href="{{ route('bunq.oauth.authorize') }}" class="btn btn-primary">
                                                 <i class="fas fa-piggy-bank"></i>
                                                 Authorize bunq
                                             </a>
 
+
+                                        @else
+                                            <div data-bunq-disconnect-button class="btn btn-success">
+                                                <i class="fa fa-check" aria-hidden="true"></i>
+                                                {{ __('bunq.bunq_connected') }}
+                                            </div>
+
+                                            <div data-bunq-disconnect-confirm style="display: none;">
+                                                <a class="btn btn-danger" href="{{ route('bunq.oauth.disconnect') }}" onclick="event.preventDefault(); document.getElementById('bunq-disconnect-form').submit();">
+                                                    <i class="fa fa-times" aria-hidden="true"></i>
+                                                    {{ __('bunq.disconnect_bunq') }}
+                                                </a>
+                                                <form id="bunq-disconnect-form" action="{{ route('bunq.oauth.disconnect') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                </form>
+                                            </div>
+
                                             <ul class="mt-3">
                                                 <li><a href="{{ route('bunq.monetary-accounts.list') }}">{{ __('bunq.monetary_accounts') }}</a></li>
                                             </ul>
-
-                                        @else
-                                            Connected!
                                         @endif
                                     </div>
                                 </div>
@@ -82,10 +95,14 @@
 
 @push('scripts')
     <script type="text/javascript">
-
         $("[data-splitwise-disconnect-button]").click(function () {
             $('[data-splitwise-disconnect-button]').hide();
             $('[data-splitwise-disconnect-confirm]').fadeIn();
+        });
+
+        $("[data-bunq-disconnect-button]").click(function () {
+            $('[data-bunq-disconnect-button]').hide();
+            $('[data-bunq-disconnect-confirm]').fadeIn();
         });
     </script>
 @endpush

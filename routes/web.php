@@ -34,8 +34,8 @@ Route::group(['middleware' => ['auth'],], function () {
             ->name('oauth.authorize');
         Route::get('/redirect', 'Bunq\AuthController@processRedirect')
             ->name('oauth.redirect');
-        Route::get('/token', 'Bunq\AuthController@token')
-            ->name('oauth.token');
+        Route::post('/oauth', 'Bunq\AuthController@disconnect')
+            ->name('oauth.disconnect');
 
         // Monetary accounts
         Route::get('/monetary-accounts', 'Bunq\MonetaryAccountController@list')
