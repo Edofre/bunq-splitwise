@@ -20,6 +20,8 @@ return [
 
     // Monetary accounts
     'monetary_accounts'               => 'Monetary accounts',
+    'no_monetary_accounts_found'      => 'No monetary accounts found',
+    'monetary_account'                => 'Monetary account',
 
     // Flash messages
     'flash_oauth_error'               => 'Could not connect to bunq, error that occurred was: :error',
