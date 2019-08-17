@@ -11,7 +11,7 @@ use bunq\Model\Generated\Endpoint\MonetaryAccount;
 class MonetaryAccountController extends Controller
 {
     /**
-     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function list()
     {
@@ -33,12 +33,12 @@ class MonetaryAccountController extends Controller
     }
 
     /**
-     * @param $itemId
-     * @return string
+     * @param $monetaryAccountId
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function show($itemId)
+    public function show($monetaryAccountId)
     {
-        $monetaryAccount = collect(MonetaryAccount::get($itemId)->getValue());
+        $monetaryAccount = MonetaryAccount::get($monetaryAccountId)->getValue();
 
         return view('bunq.monetary-accounts.show')->with([
             'monetaryAccount' => $monetaryAccount,

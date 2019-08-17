@@ -23,6 +23,12 @@ return [
     'no_monetary_accounts_found'      => 'No monetary accounts found',
     'monetary_account'                => 'Monetary account',
 
+    // Payments
+    'payments'                        => 'Payments',
+    'no_payments_found'               => 'No payments found',
+    'sync'                            => 'Sync payments',
+    'payments_currently_syncing'      => 'Payments currently syncing',
+
     // Flash messages
     'flash_oauth_error'               => 'Could not connect to bunq, error that occurred was: :error',
     'flash_state_does_not_match'      => 'State does not match, could not connect!',

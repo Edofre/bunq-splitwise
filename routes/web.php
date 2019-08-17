@@ -43,14 +43,16 @@ Route::group(['middleware' => ['auth']], function () {
         // Monetary accounts
         Route::get('/monetary-accounts', 'Bunq\MonetaryAccountController@list')
             ->name('monetary-accounts.list');
-        Route::get('/monetary-accounts/{itemId}', 'Bunq\MonetaryAccountController@show')
+        Route::get('/monetary-accounts/{monetaryAccountId}', 'Bunq\MonetaryAccountController@show')
             ->name('monetary-accounts.show');
 
         // Payments
-        Route::get('/payments/{account}/week/{week}/{year}', 'Bunq\PaymentController@week')
-            ->name('payments.week');
-        Route::get('/payments/{account}/month/{month}/{year}', 'Bunq\PaymentController@month')
-            ->name('payments.year');
+        Route::post('/monetary-accounts/{monetaryAccountId}/payments/sync', 'Bunq\PaymentController@sync')
+            ->name('monetary-accounts.payments.sync');
+        Route::get('/monetary-accounts/{monetaryAccountId}/payments/{account}/week/{week}/{year}', 'Bunq\PaymentController@week')
+            ->name('monetary-accounts.payments.week');
+        Route::get('/monetary-accounts/{monetaryAccountId}/payments/{account}/month/{month}/{year}', 'Bunq\PaymentController@month')
+            ->name('monetary-accounts.payments.year');
     });
 
     Route::group(['prefix' => 'splitwise', 'as' => 'splitwise.'], function () {
