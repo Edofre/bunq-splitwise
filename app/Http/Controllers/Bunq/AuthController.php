@@ -64,7 +64,7 @@ class AuthController extends Controller
      */
     public function processRedirect(Request $request)
     {
-        $state = $request->get('amp;state');
+        $state = $request->get('state');
         $code = $request->get('code');
 
         if ($state !== session()->get('bunq_state')) {
