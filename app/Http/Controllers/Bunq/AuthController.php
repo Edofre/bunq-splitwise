@@ -108,4 +108,19 @@ class AuthController extends Controller
         return redirect()->to('home');
     }
 
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function disconnect()
+    {
+        // Update the encrypted token in the user
+        $user = auth()->user();
+        $user->update([
+            'bunq_token' => null,
+        ]);
+
+        flash(__('bunq.flash_successfully_disconnected'))->success();
+        return redirect()->to('home');
+    }
+
 }
