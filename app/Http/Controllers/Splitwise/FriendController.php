@@ -41,6 +41,7 @@ class FriendController extends Controller
                 'friends' => collect(json_decode($response)->friends),
             ]);
         } catch (\Exception $exception) {
+            \Log::channel('splitwise')->error('Could not list friends', ['exception' => $exception]);
             abort(500, $exception->getMessage());
         }
     }
@@ -68,6 +69,7 @@ class FriendController extends Controller
             ]);
 
         } catch (\Exception $exception) {
+            \Log::channel('splitwise')->error('Could not find friend', ['exception' => $exception]);
             abort(404, __('splitwise.friend_not_found'));
         }
 

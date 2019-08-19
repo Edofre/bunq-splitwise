@@ -36,6 +36,7 @@ class Controller extends BaseController
                 $apiContext = ApiContext::restore($configFile);
                 BunqContext::loadApiContext($apiContext);
             } catch (\Exception $exception) {
+                \Log::channel('bunq')->error('Could not restore api context', ['exception' => $exception]);
                 abort(500, $exception->getMessage());
             }
 

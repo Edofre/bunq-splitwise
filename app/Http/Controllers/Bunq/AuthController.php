@@ -101,7 +101,7 @@ class AuthController extends Controller
                 flash(__('bunq.flash_could_not_connect'))->error();
             }
         } catch (\Exception $exception) {
-            // TODO, log error
+            \Log::channel('bunq')->error('Could not auth with bunq', ['exception' => $exception]);
             flash(__('bunq.flash_oauth_error', ['error' => $exception->getMessage()]))->error();
         }
 

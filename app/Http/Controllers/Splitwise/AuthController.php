@@ -88,7 +88,7 @@ class AuthController extends Controller
                 flash(__('splitwise.flash_could_not_connect'))->error();
             }
         } catch (\Exception $exception) {
-            // TODO, log error
+            \Log::channel('splitwise')->error('Could not auth with splitwise', ['exception' => $exception]);
             flash(__('splitwise.flash_oauth_error', ['error' => $exception->getMessage()]))->error();
         }
 
