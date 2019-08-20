@@ -15,12 +15,17 @@ class CreatePaymentsTable extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->bigIncrements('id');
 
+            $table->bigInteger('bunq_monetary_account_id');
             $table->bigInteger('bunq_payment_id');
             $table->string('splitwise_id')->nullable();
 
-            // TODO
+            $table->decimal('value');
+            $table->integer('currency');
 
-            $table->decimal('amount', '');
+            $table->text('description')->nullable();
+            $table->integer('type');
+            $table->integer('sub_type');
+
             $table->dateTime('created_at');
         });
     }
