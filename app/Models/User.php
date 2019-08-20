@@ -8,6 +8,16 @@ use Illuminate\Notifications\Notifiable;
 /**
  * Class User
  * @package App\Models
+ * @property int                             $id
+ * @property string                          $name
+ * @property string                          $email
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string                          $password
+ * @property string|null                     $remember_token
+ * @property string|null                     $bunq_token
+ * @property string|null                     $splitwise_token
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  */
 class User extends Authenticatable
 {

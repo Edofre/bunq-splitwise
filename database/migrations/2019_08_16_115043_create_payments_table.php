@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
 
             $table->bigInteger('bunq_monetary_account_id');
             $table->bigInteger('bunq_payment_id');
-            $table->string('splitwise_id')->nullable();
+            $table->bigInteger('splitwise_id')->nullable();
 
             $table->decimal('value');
             $table->integer('currency');
