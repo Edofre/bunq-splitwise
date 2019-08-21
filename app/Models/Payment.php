@@ -7,25 +7,26 @@ use Illuminate\Database\Eloquent\Model;
 /**
  * Class Payment
  * @package App\Models
- * @property integer                    $bunq_monetary_account_id
  * @property integer                    $bunq_payment_id
+ * @property integer                    $bunq_monetary_account_id
  * @property integer|null               $splitwise_id
  * @property integer                    $value
  * @property string                     $currency
  * @property string                     $description
- * @property integer                    $type
- * @property integer                    $sub_type
+ * @property string $type
+ * @property string                    $sub_type
  * @property \Illuminate\Support\Carbon $created_at
  */
 class Payment extends Model
 {
+
     /**
      * The attributes that are mass assignable.
      * @var array
      */
     protected $fillable = [
-        'bunq_monetary_account_id',
         'bunq_payment_id',
+        'bunq_monetary_account_id',
         'splitwise_id',
 
         'value',
@@ -43,8 +44,8 @@ class Payment extends Model
      * @var array
      */
     protected $hidden = [
-        'bunq_monetary_account_id',
         'bunq_payment_id',
+        'bunq_monetary_account_id',
         'splitwise_id',
     ];
 
