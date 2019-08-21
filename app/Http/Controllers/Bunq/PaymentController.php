@@ -21,7 +21,7 @@ class PaymentController extends Controller
         SyncPayments::dispatch($monetaryAccountId);
 
         flash(__('bunq.payments_currently_syncing'))->success();
-        return redirect('bunq.monetary-accounts.payments.list', ['monetaryAccountId' => $monetaryAccountId]);
+        return redirect()->route('bunq.monetary-accounts.payments.list', ['monetaryAccountId' => $monetaryAccountId]);
     }
 
 

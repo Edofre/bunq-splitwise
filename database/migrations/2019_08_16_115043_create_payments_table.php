@@ -20,13 +20,14 @@ class CreatePaymentsTable extends Migration
             $table->bigInteger('splitwise_id')->nullable();
 
             $table->decimal('value');
-            $table->integer('currency');
+            $table->string('currency');
 
             $table->text('description')->nullable();
             $table->string('type');
             $table->string('sub_type');
 
-            $table->dateTime('created_at');
+            $table->dateTime('payment_at');
+            $table->timestamps();
         });
     }
 

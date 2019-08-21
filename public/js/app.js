@@ -7144,7 +7144,7 @@ function Sizzle( selector, context, results, seed ) {
 			// Take advantage of querySelectorAll
 			if ( support.qsa &&
 				!nonnativeSelectorCache[ selector + " " ] &&
-				(!rbuggyQSA || !rbuggyQSA.test( selector )) &&
+				(!rbuggyQSA || !rbuggyQSA.Test( selector )) &&
 
 				// Support: IE 8 only
 				// Exclude object elements
@@ -7840,8 +7840,8 @@ Sizzle.matchesSelector = function( elem, expr ) {
 
 	if ( support.matchesSelector && documentIsHTML &&
 		!nonnativeSelectorCache[ expr + " " ] &&
-		( !rbuggyMatches || !rbuggyMatches.test( expr ) ) &&
-		( !rbuggyQSA     || !rbuggyQSA.test( expr ) ) ) {
+		( !rbuggyMatches || !rbuggyMatches.Test( expr ) ) &&
+		( !rbuggyQSA     || !rbuggyQSA.Test( expr ) ) ) {
 
 		try {
 			var ret = matches.call( elem, expr );
@@ -15227,7 +15227,7 @@ function ajaxHandleResponses( s, jqXHR, responses ) {
 	// Check if we're dealing with a known content-type
 	if ( ct ) {
 		for ( type in contents ) {
-			if ( contents[ type ] && contents[ type ].test( ct ) ) {
+			if ( contents[ type ] && contents[ type ].Test( ct ) ) {
 				dataTypes.unshift( type );
 				break;
 			}
@@ -42548,7 +42548,7 @@ function matches (pattern, name) {
   } else if (typeof pattern === 'string') {
     return pattern.split(',').indexOf(name) > -1
   } else if (isRegExp(pattern)) {
-    return pattern.test(name)
+    return pattern.Test(name)
   }
   /* istanbul ignore next */
   return false
@@ -43183,7 +43183,7 @@ function createPatchFunction (backend) {
         config.ignoredElements.length &&
         config.ignoredElements.some(function (ignore) {
           return isRegExp(ignore)
-            ? ignore.test(vnode.tag)
+            ? ignore.Test(vnode.tag)
             : ignore === vnode.tag
         })
       ) &&
@@ -44422,7 +44422,7 @@ function getAndRemoveAttrByRegex (
   var list = el.attrsList;
   for (var i = 0, l = list.length; i < l; i++) {
     var attr = list[i];
-    if (name.test(attr.name)) {
+    if (name.Test(attr.name)) {
       list.splice(i, 1);
       return attr
     }
@@ -49447,7 +49447,7 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
   null,
   null,
   null
-  
+
 )
 
 /* hot reload */
@@ -49467,7 +49467,7 @@ component.options.__file = "resources/js/components/ExampleComponent.vue"
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./ExampleComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/ExampleComponent.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 

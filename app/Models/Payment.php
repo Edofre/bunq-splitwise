@@ -13,9 +13,11 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer                    $value
  * @property string                     $currency
  * @property string                     $description
- * @property string $type
- * @property string                    $sub_type
+ * @property string                     $type
+ * @property string                     $sub_type
+ * @property \Illuminate\Support\Carbon $payment_at
  * @property \Illuminate\Support\Carbon $created_at
+ * @property \Illuminate\Support\Carbon $updated_at
  */
 class Payment extends Model
 {
@@ -36,7 +38,7 @@ class Payment extends Model
         'type',
         'sub_type',
 
-        'created_at',
+        'payment_at',
     ];
 
     /**
@@ -54,6 +56,8 @@ class Payment extends Model
      * @var array
      */
     protected $casts = [
+        'payment_at' => 'datetime',
         'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 }
