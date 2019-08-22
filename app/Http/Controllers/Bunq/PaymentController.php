@@ -34,17 +34,11 @@ class PaymentController extends Controller
     {
         $payments = Payment::query()
             ->select([
-                'bunq_payment_id',
-                'bunq_monetary_account_id',
+                'id',
                 'splitwise_id',
-
                 'value',
                 'currency',
-
                 'description',
-                'type',
-                'sub_type',
-
                 'payment_at',
             ])
             ->where('bunq_monetary_account_id', $monetaryAccountId);

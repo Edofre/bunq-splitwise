@@ -70,9 +70,7 @@
                             <table data-datatable="payments" class="table table-bordered table-sm" width="100%" cellspacing="0">
                                 <thead>
                                 <tr>
-                                    <th scope="col">{{ __('payment.splitwise_id') }}</th>
                                     <th scope="col">{{ __('payment.id') }}</th>
-                                    <th scope="col">{{ __('payment.bunq_payment_id') }}</th>
                                     <th scope="col">{{ __('payment.description') }}</th>
                                     <th scope="col">{{ __('payment.value') }}</th>
                                     <th scope="col">{{ __('payment.payment_at') }}</th>
@@ -97,9 +95,7 @@
                 url: '{{ route('bunq.monetary-accounts.payments.data', ['monetaryAccountId' => $monetaryAccountId]) }}',
             },
             columns: [
-                {data: 'splitwise_id', name: 'splitwise_id'},
                 {data: 'id', name: 'id'},
-                {data: 'bunq_payment_id', name: 'bunq_payment_id'},
                 {data: 'description', name: 'description'},
                 {data: 'value', name: 'value'},
                 {data: 'payment_at', name: 'payment_at'},

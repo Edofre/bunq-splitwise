@@ -9,3 +9,7 @@
 @import 'variables';
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+// Datatables package
+@import "~datatables.net-bs4/css/dataTables.bootstrap4";
+// Own datatables styling
+@import 'datatables';
