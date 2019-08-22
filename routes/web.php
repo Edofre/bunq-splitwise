@@ -49,9 +49,13 @@ Route::group(['middleware' => ['auth']], function () {
         // Payments
         Route::post('/monetary-accounts/{monetaryAccountId}/payments/sync', 'Bunq\PaymentController@sync')
             ->name('monetary-accounts.payments.sync');
-        Route::get('/monetary-accounts/{monetaryAccountId}/payments/{account}/week/{week}/{year}', 'Bunq\PaymentController@week')
+        Route::any('/monetary-accounts/{monetaryAccountId}/payments', 'Bunq\PaymentController@data')
+            ->name('monetary-accounts.payments.data');
+
+        // TODO
+        Route::get('/monetary-accounts/{monetaryAccountId}/payments/week/{week}/{year}', 'Bunq\PaymentController@week')
             ->name('monetary-accounts.payments.week');
-        Route::get('/monetary-accounts/{monetaryAccountId}/payments/{account}/month/{month}/{year}', 'Bunq\PaymentController@month')
+        Route::get('/monetary-accounts/{monetaryAccountId}/payments/month/{month}/{year}', 'Bunq\PaymentController@month')
             ->name('monetary-accounts.payments.year');
     });
 
