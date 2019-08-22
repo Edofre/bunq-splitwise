@@ -11,7 +11,18 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
-} catch (e) {}
+
+    // Datatables, make sure you call this last, will break all other things...
+    require('datatables.net-bs4');
+
+    $.extend(true, $.fn.dataTable.defaults, {
+        pageLength: 25,
+        processing: true,
+        serverSide: true,
+        responsive: true,
+    });
+} catch (e) {
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests

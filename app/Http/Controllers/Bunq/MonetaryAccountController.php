@@ -41,7 +41,8 @@ class MonetaryAccountController extends Controller
         $monetaryAccount = MonetaryAccount::get($monetaryAccountId)->getValue();
 
         return view('bunq.monetary-accounts.show')->with([
-            'monetaryAccount' => $monetaryAccount,
+            'monetaryAccountId' => $monetaryAccountId,
+            'monetaryAccount'   => $monetaryAccount,
         ]);
     }
 
