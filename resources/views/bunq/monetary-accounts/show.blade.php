@@ -56,7 +56,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="float-right">
-                                    <a href="#" data-refresh-datatable title="{{ __('common.refresh_data') }}" class='btn btn-sm btn-success'>
+                                    <a href="#" data-refresh-datatable title="{{ __('common.refresh_data') }}" class='btn btn-sm btn-primary'>
                                         <span class="icon"><i class="fa fa-redo-alt"></i></span>
                                         {{ __('common.refresh_data') }}
                                     </a>

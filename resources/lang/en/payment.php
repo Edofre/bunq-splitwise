@@ -10,8 +10,8 @@ return [
     */
 
     // General
-    'bunq'                     => 'bunq',
-    'bunq_connected'           => 'bunq connected!',
+    'payment'                  => 'Payment',
+    'payments'                 => 'Payments',
 
     // Attributes
     'id'                       => 'ID',

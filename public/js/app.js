@@ -64849,7 +64849,7 @@ try {
   __webpack_require__(/*! datatables.net-bs4 */ "./node_modules/datatables.net-bs4/js/dataTables.bootstrap4.js");
 
   $.extend(true, $.fn.dataTable.defaults, {
-    pageLength: 25,
+    pageLength: 10,
     processing: true,
     serverSide: true,
     responsive: true

@@ -16,7 +16,7 @@ try {
     require('datatables.net-bs4');
 
     $.extend(true, $.fn.dataTable.defaults, {
-        pageLength: 25,
+        pageLength: 10,
         processing: true,
         serverSide: true,
         responsive: true,
