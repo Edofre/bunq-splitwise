@@ -69,7 +69,15 @@ class SyncPayments implements ShouldQueue
         // Fetch all the payment listings
         $listing = Payment::listing($this->monetaryAccountId, $parameters);
 
+        // Fetch the last payment for this monetary account
+        $lastPaymentId = $this->findLastPaymentId();
+        
         foreach ($listing->getValue() as $payment) {
+            // If the last payment ID has been imported already, stop importing!
+            if ($lastPaymentId === $payment->getId()) {
+                break;
+            }
+
             // Get the amount from the payment
             $amount = $payment->getAmount();
 
@@ -93,5 +101,18 @@ class SyncPayments implements ShouldQueue
         // if (!is_null($pagination->getOlderId())) {
         //   $this->loopPayments($pagination->getOlderId());
         // }
+    }
+
+    /**
+     * @return integer|null
+     */
+    private function findLastPaymentId()
+    {
+        $payment = \App\Models\Payment::query()
+            ->where('bunq_monetary_account_id', $this->monetaryAccountId)
+            ->orderByDesc('bunq_payment_id')
+            ->first();
+
+        return !is_null($payment) ? $payment->bunq_payment_id : null;
     }
 }
