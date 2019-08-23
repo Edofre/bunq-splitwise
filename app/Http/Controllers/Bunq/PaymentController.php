@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Bunq;
 
-use App\Jobs\Bunq\SyncPayments;
 use App\Models\Payment;
 use Yajra\DataTables\DataTables;
 
@@ -13,24 +12,21 @@ use Yajra\DataTables\DataTables;
 class PaymentController extends Controller
 {
     /**
-     * @param $monetaryAccountId
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function sync($monetaryAccountId)
+    public function index()
     {
-        // Dispatch the job that will sync ALL payments, could take a while
-        SyncPayments::dispatch($monetaryAccountId);
 
-        flash(__('bunq.payments_currently_syncing'))->success()->important();
-        return redirect()->route('bunq.monetary-accounts.show', ['monetaryAccountId' => $monetaryAccountId]);
+        return view('bunq.payments.index')->with([
+
+        ]);
     }
 
     /**
-     * @param $monetaryAccountId
      * @return mixed
      * @throws \Exception
      */
-    public function data($monetaryAccountId)
+    public function data()
     {
         $payments = Payment::query()
             ->select([
@@ -40,29 +36,15 @@ class PaymentController extends Controller
                 'currency',
                 'description',
                 'payment_at',
-            ])
-            ->where('bunq_monetary_account_id', $monetaryAccountId);
+            ]);
 
         $datatables = Datatables::of($payments);
-        //            TODO
-        //            ->editColumn('action', function ($payment) {
-        //                return view('bunq.payments.columns._index', ['payment' => $payment]);
-        //            })
-        //            ->rawColumns(['action']);
         return $datatables->make(true);
     }
 
-    /**
-     * @param $monetaryAccountId
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function list($monetaryAccountId)
+    public function show(Payment $payment)
     {
-        var_dump($monetaryAccountId);
-        exit;
-
-        return view('bunq.payments.list')->with([
-            'payments' => [],
-        ]);
+        var_dump($payment);
     }
 }
+

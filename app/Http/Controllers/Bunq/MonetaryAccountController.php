@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers\Bunq;
 
+use App\Jobs\Bunq\SyncPayments;
+use App\Models\Payment;
 use bunq\Model\Generated\Endpoint\MonetaryAccount;
+use Yajra\DataTables\DataTables;
 
 /**
  * Class MonetaryAccountController
@@ -13,7 +16,7 @@ class MonetaryAccountController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function list()
+    public function index()
     {
         $monetaryAccountList = collect(MonetaryAccount::listing()->getValue());
 
@@ -27,7 +30,7 @@ class MonetaryAccountController extends Controller
         //        }
         //        exit;
 
-        return view('bunq.monetary-accounts.list')->with([
+        return view('bunq.monetary-accounts.index')->with([
             'monetaryAccounts' => $monetaryAccountList,
         ]);
     }
@@ -44,6 +47,46 @@ class MonetaryAccountController extends Controller
             'monetaryAccountId' => $monetaryAccountId,
             'monetaryAccount'   => $monetaryAccount,
         ]);
+    }
+
+    /**
+     * @param $monetaryAccountId
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function sync($monetaryAccountId)
+    {
+        // Dispatch the job that will sync ALL payments, could take a while
+        SyncPayments::dispatch($monetaryAccountId);
+
+        flash(__('bunq.payments_currently_syncing'))->success()->important();
+        return redirect()->route('bunq.monetary-accounts.show', ['monetaryAccountId' => $monetaryAccountId]);
+    }
+
+    /**
+     * @param $monetaryAccountId
+     * @return mixed
+     * @throws \Exception
+     */
+    public function paymentData($monetaryAccountId)
+    {
+        $payments = Payment::query()
+            ->select([
+                'id',
+                'splitwise_id',
+                'value',
+                'currency',
+                'description',
+                'payment_at',
+            ])
+            ->where('bunq_monetary_account_id', $monetaryAccountId);
+
+        $datatables = Datatables::of($payments);
+        //            TODO
+        //            ->editColumn('action', function ($payment) {
+        //                return view('bunq.payments.columns._index', ['payment' => $payment]);
+        //            })
+        //            ->rawColumns(['action']);
+        return $datatables->make(true);
     }
 
 }

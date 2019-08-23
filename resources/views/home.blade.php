@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">Dashboard</div>
 
@@ -43,7 +43,8 @@
                                             </div>
 
                                             <ul class="mt-3">
-                                                <li><a href="{{ route('bunq.monetary-accounts.list') }}">{{ __('bunq.monetary_accounts') }}</a></li>
+                                                <li><a href="{{ route('bunq.monetary-accounts.index') }}">{{ __('bunq.monetary_accounts') }}</a></li>
+                                                <li><a href="{{ route('bunq.payments.index') }}">{{ __('bunq.payments') }}</a></li>
                                             </ul>
                                         @endif
                                     </div>

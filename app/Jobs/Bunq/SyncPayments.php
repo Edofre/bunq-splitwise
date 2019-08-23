@@ -71,7 +71,7 @@ class SyncPayments implements ShouldQueue
 
         // Fetch the last payment for this monetary account
         $lastPaymentId = $this->findLastPaymentId();
-        
+
         foreach ($listing->getValue() as $payment) {
             // If the last payment ID has been imported already, stop importing!
             if ($lastPaymentId === $payment->getId()) {

@@ -41,22 +41,29 @@ Route::group(['middleware' => ['auth']], function () {
             ->name('api-context');
 
         // Monetary accounts
-        Route::get('/monetary-accounts', 'Bunq\MonetaryAccountController@list')
-            ->name('monetary-accounts.list');
+        Route::get('/monetary-accounts', 'Bunq\MonetaryAccountController@index')
+            ->name('monetary-accounts.index');
         Route::get('/monetary-accounts/{monetaryAccountId}', 'Bunq\MonetaryAccountController@show')
             ->name('monetary-accounts.show');
+        Route::any('/monetary-accounts/{monetaryAccountId}/payments/data', 'Bunq\MonetaryAccountController@paymentData')
+            ->name('monetary-accounts.payments.data');
+        Route::post('/monetary-accounts/{monetaryAccountId}/payments/sync', 'Bunq\MonetaryAccountController@paymentSync')
+            ->name('monetary-accounts.payments.sync');
 
         // Payments
-        Route::post('/monetary-accounts/{monetaryAccountId}/payments/sync', 'Bunq\PaymentController@sync')
-            ->name('monetary-accounts.payments.sync');
-        Route::any('/monetary-accounts/{monetaryAccountId}/payments', 'Bunq\PaymentController@data')
-            ->name('monetary-accounts.payments.data');
+        Route::get('/payments', 'Bunq\PaymentController@index')
+            ->name('payments.index');
+        Route::get('/payments/data', 'Bunq\PaymentController@data')
+            ->name('payments.data');
+        Route::get('/payments/{paymentId}', 'Bunq\PaymentController@show')
+            ->name('payments.show');
+
 
         // TODO
-        Route::get('/monetary-accounts/{monetaryAccountId}/payments/week/{week}/{year}', 'Bunq\PaymentController@week')
-            ->name('monetary-accounts.payments.week');
-        Route::get('/monetary-accounts/{monetaryAccountId}/payments/month/{month}/{year}', 'Bunq\PaymentController@month')
-            ->name('monetary-accounts.payments.year');
+        //        Route::get('/monetary-accounts/{monetaryAccountId}/payments/week/{week}/{year}', 'Bunq\PaymentController@week')
+        //            ->name('monetary-accounts.payments.week');
+        //        Route::get('/monetary-accounts/{monetaryAccountId}/payments/month/{month}/{year}', 'Bunq\PaymentController@month')
+        //            ->name('monetary-accounts.payments.year');
     });
 
     Route::group(['prefix' => 'splitwise', 'as' => 'splitwise.'], function () {

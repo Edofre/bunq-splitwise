@@ -8,18 +8,10 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6">
-                                {{ __('bunq.monetary_account') }}
+                                {{ __('bunq.payment') }}
                             </div>
                             <div class="col-md-6">
-                                <div class="float-right">
-                                    <a class="btn btn-sm btn-primary" href="{{ route('bunq.monetary-accounts.payments.sync', ['monetaryAccountId' => $monetaryAccount->getReferencedObject()->getId()]) }}" onclick="event.preventDefault(); document.getElementById('payments-sync-form').submit();">
-                                        <i class="fas fa-sync"></i>
-                                        {{ __('bunq.sync') }}
-                                    </a>
-                                    <form id="payments-sync-form" action="{{ route('bunq.monetary-accounts.payments.sync', ['monetaryAccountId' => $monetaryAccount->getReferencedObject()->getId()]) }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
+                                {{-- Buttons :)--}}
                             </div>
                         </div>
                     </div>
