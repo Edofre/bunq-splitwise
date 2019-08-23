@@ -9,10 +9,15 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <i class="fas fa-money-bill-wave"></i>
-                                {{ __('bunq.payment') }}
+                                {{ __('payment.payment') }}
                             </div>
                             <div class="col-md-6">
-                                {{-- Buttons :)--}}
+                                <div class="float-right">
+                                    <a class="btn btn-sm btn-primary" href="{{ route('bunq.payments.index') }}">
+                                        <i class="fas fa-list"></i>
+                                        {{ __('bunq.show_all_payments') }}
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

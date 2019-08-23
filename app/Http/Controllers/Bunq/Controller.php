@@ -37,7 +37,19 @@ class Controller extends BaseController
                 BunqContext::loadApiContext($apiContext);
             } catch (\Exception $exception) {
                 \Log::channel('bunq')->error('Could not restore api context', ['exception' => $exception]);
-                abort(500, $exception->getMessage());
+
+                // Remove the old bunq token
+                $user->update([
+                    'bunq_token' => null,
+                ]);
+
+                // Remove the context file if it exists
+                if (file_exists($configFile)) {
+                    \File::delete($configFile);
+                }
+
+                flash(__('bunq.flash_api_context_exception_disconnected'))->success();
+                return redirect()->to('home');
             }
 
             return $next($request);
