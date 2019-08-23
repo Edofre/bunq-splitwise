@@ -5,7 +5,10 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">{{ __('bunq.payments') }}</div>
+                    <div class="card-header">
+                        <i class="fas fa-money-bill-wave"></i>
+                        {{ __('bunq.payments') }}
+                    </div>
 
                     <div class="card-body">
                         <div class="table-responsive">
@@ -16,6 +19,7 @@
                                     <th scope="col">{{ __('payment.description') }}</th>
                                     <th scope="col">{{ __('payment.value') }}</th>
                                     <th scope="col">{{ __('payment.payment_at') }}</th>
+                                    <th scope="col">&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -41,6 +45,7 @@
                 {data: 'description', name: 'description'},
                 {data: 'value', name: 'value'},
                 {data: 'payment_at', name: 'payment_at'},
+                {data: 'action', name: 'action', searchable: false, orderable: false}
             ]
         });
     </script>

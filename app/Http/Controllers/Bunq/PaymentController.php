@@ -38,13 +38,25 @@ class PaymentController extends Controller
                 'payment_at',
             ]);
 
-        $datatables = Datatables::of($payments);
+        // Create datatables response
+        $datatables = Datatables::of($payments)
+            ->editColumn('action', function ($payment) {
+                return view('bunq.payments.datatables._actions', ['payment' => $payment]);
+            })
+            ->rawColumns(['action']);
+
         return $datatables->make(true);
     }
 
+    /**
+     * @param Payment $payment
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show(Payment $payment)
     {
-        var_dump($payment);
+        return view('bunq.payments.show')->with([
+            'payment' => $payment,
+        ]);
     }
 }
 

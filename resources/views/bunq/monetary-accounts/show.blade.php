@@ -8,6 +8,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6">
+                                <i class="fas fa-money-check"></i>
                                 {{ __('bunq.monetary_account') }}
                             </div>
                             <div class="col-md-6">
@@ -52,6 +53,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6">
+                                <i class="fas fa-money-bill-wave"></i>
                                 {{ __('bunq.payments') }}
                             </div>
                             <div class="col-md-6">
@@ -74,6 +76,7 @@
                                     <th scope="col">{{ __('payment.description') }}</th>
                                     <th scope="col">{{ __('payment.value') }}</th>
                                     <th scope="col">{{ __('payment.payment_at') }}</th>
+                                    <th scope="col">&nbsp;</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -99,6 +102,7 @@
                 {data: 'description', name: 'description'},
                 {data: 'value', name: 'value'},
                 {data: 'payment_at', name: 'payment_at'},
+                {data: 'action', name: 'action', searchable: false, orderable: false}
             ]
         });
 

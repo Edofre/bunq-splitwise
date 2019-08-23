@@ -17,7 +17,10 @@
                         <div class="col-sm-12 row">
                             <div class="col-sm-6">
                                 <div class="card">
-                                    <div class="card-header">Bunq</div>
+                                    <div class="card-header">
+                                        <i class="fas fa-piggy-bank"></i>
+                                        Bunq
+                                    </div>
                                     <div class="card-body">
                                         @if(is_null($bunqToken))
                                             <a href="{{ route('bunq.oauth.authorize') }}" class="btn btn-primary">
@@ -53,7 +56,10 @@
 
                             <div class="col-sm-6">
                                 <div class="card">
-                                    <div class="card-header">Splitwise</div>
+                                    <div class="card-header">
+                                        <i class="fas fa-money-check-alt"></i>
+                                        Splitwise
+                                    </div>
                                     <div class="card-body">
                                         @if(is_null($splitwiseToken))
                                             <a href="{{ route('splitwise.oauth.authorize') }}" class="btn btn-primary">

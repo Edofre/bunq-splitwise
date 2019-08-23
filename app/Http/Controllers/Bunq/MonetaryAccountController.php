@@ -80,12 +80,13 @@ class MonetaryAccountController extends Controller
             ])
             ->where('bunq_monetary_account_id', $monetaryAccountId);
 
-        $datatables = Datatables::of($payments);
-        //            TODO
-        //            ->editColumn('action', function ($payment) {
-        //                return view('bunq.payments.columns._index', ['payment' => $payment]);
-        //            })
-        //            ->rawColumns(['action']);
+        // Create datatables response
+        $datatables = Datatables::of($payments)
+            ->editColumn('action', function ($payment) {
+                return view('bunq.payments.datatables._actions', ['payment' => $payment]);
+            })
+            ->rawColumns(['action']);
+
         return $datatables->make(true);
     }
 

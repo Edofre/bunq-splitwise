@@ -5,7 +5,10 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">{{ __('bunq.monetary_accounts') }}</div>
+                    <div class="card-header">
+                        <i class="fas fa-money-check"></i>
+                        {{ __('bunq.monetary_accounts') }}
+                    </div>
 
                     <div class="card-body">
                         <ul class="list-group">

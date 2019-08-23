@@ -8,6 +8,7 @@
                     <div class="card-header">
                         <div class="row">
                             <div class="col-md-6">
+                                <i class="fas fa-money-bill-wave"></i>
                                 {{ __('bunq.payment') }}
                             </div>
                             <div class="col-md-6">
@@ -20,60 +21,44 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <dl class="dl-horizontal">
-                                    <dt>{{ __('monetary-account.id') }}</dt>
-                                    <dd>{{ $monetaryAccount->getReferencedObject()->getId() }}</dd>
+                                    <dt>{{ __('payment.id') }}</dt>
+                                    <dd>{{ $payment->id }}</dd>
 
-                                    <dt>{{ __('monetary-account.description') }}</dt>
-                                    <dd>{{ $monetaryAccount->getReferencedObject()->getDescription() }}</dd>
+                                    <dt>{{ __('payment.bunq_payment_id') }}</dt>
+                                    <dd>{{ $payment->bunq_payment_id }}</dd>
+
+                                    <dt>{{ __('payment.bunq_monetary_account_id') }}</dt>
+                                    <dd>{{ $payment->bunq_monetary_account_id }}</dd>
+
+                                    <dt>{{ __('payment.splitwise_id') }}</dt>
+                                    <dd>{{ $payment->splitwise_id }}</dd>
+
+                                    <dt>{{ __('payment.type') }}</dt>
+                                    <dd>{{ $payment->type }}</dd>
+
+                                    <dt>{{ __('payment.sub_type') }}</dt>
+                                    <dd>{{ $payment->sub_type }}</dd>
                                 </dl>
                             </div>
                             <div class="col-md-6">
                                 <dl class="dl-horizontal">
-                                    <dt>{{ __('monetary-account.created_at') }}</dt>
-                                    <dd>{{ $monetaryAccount->getReferencedObject()->getCreated() }}</dd>
+                                    <dt>{{ __('payment.value') }}</dt>
+                                    <dd>{{ $payment->value }}</dd>
 
-                                    <dt>{{ __('monetary-account.updated_at') }}</dt>
-                                    <dd>{{ $monetaryAccount->getReferencedObject()->getUpdated() }}</dd>
+                                    <dt>{{ __('payment.currency') }}</dt>
+                                    <dd>{{ $payment->currency }}</dd>
+
+                                    <dt>{{ __('payment.description') }}</dt>
+                                    <dd>{{ $payment->description }}</dd>
+
+                                    <dt>{{ __('payment.payment_at') }}</dt>
+                                    <dd>{{ $payment->payment_at }}</dd>
                                 </dl>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="card mt-3">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="col-md-6">
-                                {{ __('bunq.payments') }}
-                            </div>
-                            <div class="col-md-6">
-                                <div class="float-right">
-                                    <a href="#" data-refresh-datatable title="{{ __('common.refresh_data') }}" class='btn btn-sm btn-primary'>
-                                        <span class="icon"><i class="fa fa-redo-alt"></i></span>
-                                        {{ __('common.refresh_data') }}
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table data-datatable="payments" class="table table-bordered table-sm" width="100%" cellspacing="0">
-                                <thead>
-                                <tr>
-                                    <th scope="col">{{ __('payment.id') }}</th>
-                                    <th scope="col">{{ __('payment.description') }}</th>
-                                    <th scope="col">{{ __('payment.value') }}</th>
-                                    <th scope="col">{{ __('payment.payment_at') }}</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -81,21 +66,6 @@
 
 @push('scripts')
     <script type="text/javascript">
-        let paymentsDatatable = $('[data-datatable="payments"]').DataTable({
-            ajax: {
-                // TODO implement ziggy
-                url: '{{ route('bunq.monetary-accounts.payments.data', ['monetaryAccountId' => $monetaryAccountId]) }}',
-            },
-            columns: [
-                {data: 'id', name: 'id'},
-                {data: 'description', name: 'description'},
-                {data: 'value', name: 'value'},
-                {data: 'payment_at', name: 'payment_at'},
-            ]
-        });
-
-        $('[data-refresh-datatable]').on('click', function () {
-            paymentsDatatable.draw();
-        })
+        // Scripts :)
     </script>
 @endpush

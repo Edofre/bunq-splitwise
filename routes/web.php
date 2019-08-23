@@ -55,7 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
             ->name('payments.index');
         Route::get('/payments/data', 'Bunq\PaymentController@data')
             ->name('payments.data');
-        Route::get('/payments/{paymentId}', 'Bunq\PaymentController@show')
+        Route::get('/payments/{payment}', 'Bunq\PaymentController@show')
             ->name('payments.show');
 
 
