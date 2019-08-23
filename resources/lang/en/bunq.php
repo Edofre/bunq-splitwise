@@ -25,6 +25,7 @@ return [
 
     // Payments
     'payments'                                 => 'Payments',
+    'filter_payments'                          => 'Filter payments',
     'show_all_payments'                        => 'Show all payments',
     'no_payments_found'                        => 'No payments found',
     'sync'                                     => 'Sync payments',

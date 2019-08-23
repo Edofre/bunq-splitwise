@@ -6,8 +6,22 @@
             <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                        <i class="fas fa-money-bill-wave"></i>
-                        {{ __('bunq.payments') }}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <i class="fas fa-money-bill-wave"></i>
+                                {{ __('bunq.payments') }}
+                            </div>
+                            <div class="col-md-6">
+                                <div class="float-right">
+                                    <a class="btn btn-sm btn-primary" href="{{ route('bunq.payments.filter') }}">
+                                        <i class="fas fa-filter"></i>
+                                        {{ __('bunq.filter_payments') }}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
 
                     <div class="card-body">
