@@ -50,8 +50,25 @@
                             <button type="submit" class="btn btn-primary">Filter</button>
                         </form>
                     </div>
+                </div>
 
-                    <form action="{{ route('bunq.payments.process') }}" method="POST">
+
+                <form action="{{ route('bunq.payments.process') }}" method="POST">
+                    <div class="card mt-3">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <i class="fas fa-search"></i>
+                                    {{ __('payment.count_payments_found', ['count' => $payments->count()]) }}
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="float-right">
+                                        <button type="submit" class="btn btn-sm btn-success">{{ __('payment.process') }}</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @csrf
                         <div class="card-body card-payments">
                             <div class="list-group">
                                 @foreach($payments as $payment)
@@ -60,10 +77,11 @@
                             </div>
                         </div>
                         <div class="card-footer text-muted">
-                            <button type="submit" class="btn btn-success">Process</button>
+                            <button type="submit" class="btn btn-sm btn-success">{{ __('payment.process') }}</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
@@ -71,6 +89,8 @@
 
 @push('scripts')
     <script type="text/javascript">
-
+        function removePayment(paymentId) {
+            $('[data-payment-id="' + paymentId + '"]').remove();
+        }
     </script>
 @endpush

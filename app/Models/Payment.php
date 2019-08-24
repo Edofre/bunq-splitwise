@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 /**
  * Class Payment
@@ -18,6 +19,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Illuminate\Support\Carbon $payment_at
  * @property \Illuminate\Support\Carbon $created_at
  * @property \Illuminate\Support\Carbon $updated_at
+ * Virtual attributes
+ * @property string                     $guessedDescription
  */
 class Payment extends Model
 {
@@ -49,4 +52,20 @@ class Payment extends Model
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
     ];
+
+    /**
+     * @return string
+     */
+    public function getGuessedDescriptionAttribute()
+    {
+        $description = $this->description;
+
+        // We always show albert with the date
+        if (Str::startsWith($description, 'ALBERT')) {
+            return 'Albert ' . $this->payment_at->format('d-m');
+        }
+
+
+        return $description . ' ' . $this->payment_at->format('d-m');
+    }
 }

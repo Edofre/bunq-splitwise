@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Bunq;
 
 use App\Http\Requests\Bunq\Payments\FilterRequest;
+use App\Http\Requests\Bunq\Payments\ProcessRequest;
 use App\Models\Payment;
 use Carbon\Carbon;
 use Yajra\DataTables\DataTables;
@@ -45,7 +46,7 @@ class PaymentController extends Controller
      * @param $year
      * @param $month
      * @param $filterAlreadySent
-     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     private function filterPayments($year, $month, $filterAlreadySent)
     {
@@ -58,10 +59,24 @@ class PaymentController extends Controller
 
         // Check if we should hide the payments that have been sent to splitwise
         if ($filterAlreadySent) {
-            $query = $query->whereNull('splitwise_id');
+            $query->whereNull('splitwise_id');
         }
 
+        // Remove payments that are positive (received)
+        $query->where('value', '<', 0);
+
+        // If description is empty, it means it's cents added to the vault
+        //        $query->whereNotNull('description');
+        $query->where('description', '!=', '');
+
         return $query->get();
+    }
+
+
+    public function process(ProcessRequest $request)
+    {
+        var_dump($request->get('payments'));
+        exit;
     }
 
     /**

@@ -29,4 +29,6 @@ return [
     'filter_already_sent'      => 'Hide already sent',
     'filter_year'              => 'Year',
     'filter_month'             => 'Month',
+    'count_payments_found'     => ':count payments found',
+    'process'                  => 'Process',
 ];
