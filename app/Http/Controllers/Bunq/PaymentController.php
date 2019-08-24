@@ -31,28 +31,37 @@ class PaymentController extends Controller
     {
         $year = $request->get('year', date('Y'));
         $month = $request->get('month', date('m'));
+        $filterAlreadySent = $request->get('filter_already_sent', true);
 
         return view('bunq.payments.filter')->with([
-            'year'     => $year,
-            'month'    => $month,
-            'payments' => $this->filterPayments($year, $month),
+            'year'              => $year,
+            'month'             => $month,
+            'filterAlreadySent' => $filterAlreadySent,
+            'payments'          => $this->filterPayments($year, $month, $filterAlreadySent),
         ]);
     }
 
     /**
      * @param $year
      * @param $month
+     * @param $filterAlreadySent
      * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
      */
-    private function filterPayments($year, $month)
+    private function filterPayments($year, $month, $filterAlreadySent)
     {
         // Create a date from the given year & month
         $date = Carbon::create($year, $month);
 
-        return Payment::query()
+        $query = Payment::query()
             ->where('payment_at', '>=', $date->startOfMonth()->format('Y-m-d'))
-            ->where('payment_at', '<=', $date->endOfMonth()->format('Y-m-d'))
-            ->get();
+            ->where('payment_at', '<=', $date->endOfMonth()->format('Y-m-d'));
+
+        // Check if we should hide the payments that have been sent to splitwise
+        if ($filterAlreadySent) {
+            $query = $query->whereNull('splitwise_id');
+        }
+
+        return $query->get();
     }
 
     /**

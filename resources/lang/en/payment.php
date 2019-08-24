@@ -24,4 +24,9 @@ return [
     'type'                     => 'Type',
     'sub_type'                 => 'Sub type',
     'payment_at'               => 'Payment at',
+
+    // Filter
+    'filter_already_sent'      => 'Hide already sent',
+    'filter_year'              => 'Year',
+    'filter_month'             => 'Month',
 ];

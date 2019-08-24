@@ -22,9 +22,9 @@
                         </div>
                     </div>
 
-                    <div class="card-body">
-                        <form action="{{ route('bunq.payments.filter') }}" method="GET" class="form-inline">
-                            <label class="mr-3">{{ __('payment.filter') }}</label>
+                    <div class="card-body justify-content-center">
+                        <form action="{{ route('bunq.payments.filter') }}" method="GET" class="form-inline justify-content-center">
+                            <label class="mr-3">{{ __('bunq.filter') }}</label>
 
                             <label class="sr-only" for="month">{{ __('payment.filter_month') }}</label>
                             <select name="month" id="month" class="custom-select custom-control-inline">
@@ -40,12 +40,29 @@
                                 @endforeach
                             </select>
 
+                            <div class="form-check mb-2 mr-sm-2">
+                                <input class="form-check-input" {{ $filterAlreadySent ? 'checked' : null }} type="checkbox" name="filter_already_sent" id="filter_already_sent">
+                                <label class="form-check-label" for="filter_already_sent">
+                                    {{ __('payment.filter_already_sent') }}
+                                </label>
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Filter</button>
                         </form>
-
-
-                        <?php var_dump($payments) ?>
                     </div>
+
+                    <form action="{{ route('bunq.payments.process') }}" method="POST">
+                        <div class="card-body card-payments">
+                            <div class="list-group">
+                                @foreach($payments as $payment)
+                                    @include('bunq.payments._payment')
+                                @endforeach
+                            </div>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <button type="submit" class="btn btn-success">Process</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
