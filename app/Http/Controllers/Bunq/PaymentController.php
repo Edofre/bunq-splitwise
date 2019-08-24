@@ -91,6 +91,7 @@ class PaymentController extends Controller
                 'splitwise_id',
                 'value',
                 'currency',
+                'counterparty_alias',
                 'description',
                 'payment_at',
             ]);

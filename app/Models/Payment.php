@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
  * @property integer|null               $splitwise_id
  * @property integer                    $value
  * @property string                     $currency
+ * @property string                     $counterparty_alias
  * @property string                     $description
  * @property string                     $type
  * @property string                     $sub_type
@@ -36,6 +37,7 @@ class Payment extends Model
         'value',
         'currency',
 
+        'counterparty_alias',
         'description',
         'type',
         'sub_type',

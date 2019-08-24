@@ -53,6 +53,9 @@
                                     <dt>{{ __('payment.currency') }}</dt>
                                     <dd>{{ $payment->currency }}</dd>
 
+                                    <dt>{{ __('payment.counterparty_alias') }}</dt>
+                                    <dd>{{ $payment->counterparty_alias }}</dd>
+
                                     <dt>{{ __('payment.description') }}</dt>
                                     <dd>{{ $payment->description }}</dd>
 

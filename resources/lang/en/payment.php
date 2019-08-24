@@ -20,6 +20,7 @@ return [
     'splitwise_id'             => 'Splitwise ID',
     'value'                    => 'Value',
     'currency'                 => 'Currency',
+    'counterparty_alias'       => 'Counterparty alias',
     'description'              => 'Description',
     'type'                     => 'Type',
     'sub_type'                 => 'Sub type',

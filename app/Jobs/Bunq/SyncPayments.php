@@ -87,10 +87,11 @@ class SyncPayments implements ShouldQueue
                 'value'                    => $amount->getValue(),
                 'currency'                 => $amount->getCurrency(),
 
-                'description' => $payment->getDescription(),
-                'type'        => $payment->getType(),
-                'sub_type'    => $payment->getSubType(),
-                'payment_at'  => Carbon::createFromFormat('Y-m-d H:i:s.u', $payment->getCreated()),
+                'counterparty_alias' => $payment->getCounterpartyAlias()->getDisplayName(),
+                'description'        => $payment->getDescription(),
+                'type'               => $payment->getType(),
+                'sub_type'           => $payment->getSubType(),
+                'payment_at'         => Carbon::createFromFormat('Y-m-d H:i:s.u', $payment->getCreated()),
             ];
 
             \App\Models\Payment::create($attributes);

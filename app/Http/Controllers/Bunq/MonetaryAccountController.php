@@ -53,7 +53,7 @@ class MonetaryAccountController extends Controller
      * @param $monetaryAccountId
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function sync($monetaryAccountId)
+    public function paymentSync($monetaryAccountId)
     {
         // Dispatch the job that will sync ALL payments, could take a while
         SyncPayments::dispatch($monetaryAccountId);
@@ -75,6 +75,7 @@ class MonetaryAccountController extends Controller
                 'splitwise_id',
                 'value',
                 'currency',
+                'counterparty_alias',
                 'description',
                 'payment_at',
             ])

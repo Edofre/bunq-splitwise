@@ -73,6 +73,7 @@
                                 <thead>
                                 <tr>
                                     <th scope="col">{{ __('payment.id') }}</th>
+                                    <th scope="col">{{ __('payment.counterparty_alias') }}</th>
                                     <th scope="col">{{ __('payment.description') }}</th>
                                     <th scope="col">{{ __('payment.value') }}</th>
                                     <th scope="col">{{ __('payment.payment_at') }}</th>
@@ -99,6 +100,7 @@
             },
             columns: [
                 {data: 'id', name: 'id'},
+                {data: 'counterparty_alias', name: 'counterparty_alias'},
                 {data: 'description', name: 'description'},
                 {data: 'value', name: 'value'},
                 {data: 'payment_at', name: 'payment_at'},
