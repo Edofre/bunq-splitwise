@@ -6,6 +6,7 @@ use App\Http\Requests\Bunq\Payments\FilterRequest;
 use App\Http\Requests\Bunq\Payments\ProcessRequest;
 use App\Models\Payment;
 use Carbon\Carbon;
+use GuzzleHttp\Client as GuzzleClient;
 use Yajra\DataTables\DataTables;
 
 /**
@@ -72,10 +73,59 @@ class PaymentController extends Controller
         return $query->get();
     }
 
-
+    /**
+     * @param ProcessRequest $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function process(ProcessRequest $request)
     {
-        var_dump($request->get('payments'));
+        // TODO, sent to splitwise
+        $payments = $request->get('payments', []);
+        $friendId = 4050136;
+
+        foreach ($payments as $paymentId => $payment) {
+
+            var_dump($paymentId);
+            var_dump($payment);
+
+            $paymentModel = Payment::find($paymentId);
+            var_dump($paymentModel->getAttributes());
+            echo '<hr/>';
+
+            try {
+                $client = new GuzzleClient([
+                    'base_uri' => config('splitwise.base_uri'),
+                ]);
+
+                $response = $client->post('create_expense', [
+                    'json'    => [
+                        'payment' => '',
+                        'friendship_id' => $friendId,
+                        'description'   => $payment['description'],
+                        'cost'          => $payment['value'],
+                    ],
+                    'headers' => [
+                        'Authorization' => 'Bearer ' . decrypt(auth()->user()->splitwise_token),
+                    ],
+                ]);
+
+                $response = $response->getBody()->getContents();
+
+                var_dump($response);
+                exit;
+
+            } catch (\Exception $exception) {
+
+                var_dump($exception);
+                exit;
+
+
+                \Log::channel('splitwise')->error('Could not create payment', ['exception' => $exception]);
+            }
+        }
+
+
+        var_dump('eind');
         exit;
     }
 
