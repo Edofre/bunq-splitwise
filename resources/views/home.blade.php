@@ -86,6 +86,7 @@
                                                 <li><a href="{{ route('splitwise.friends.index') }}">{{ __('splitwise.show_friends') }}</a></li>
                                                 <li><a href="{{ route('splitwise.groups.index') }}">{{ __('splitwise.show_groups') }}</a></li>
                                                 <li><a href="{{ route('splitwise.users.current') }}">{{ __('splitwise.show_current_user') }}</a></li>
+                                                <li><a href="{{ route('splitwise.expenses.index') }}">{{ __('splitwise.show_expenses') }}</a></li>
                                             </ul>
                                         @endif
                                     </div>

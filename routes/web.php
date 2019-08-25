@@ -90,6 +90,11 @@ Route::group(['middleware' => ['auth']], function () {
             ->name('groups.index');
         Route::get('/groups/{id}', 'Splitwise\GroupController@show')
             ->name('groups.show');
+        // Groups
+        Route::get('/expenses', 'Splitwise\ExpenseController@index')
+            ->name('expenses.index');
+        Route::get('/expenses/{id}', 'Splitwise\ExpenseController@show')
+            ->name('expenses.show');
 
         // Users
         Route::get('/users/current', 'Splitwise\UserController@current')
