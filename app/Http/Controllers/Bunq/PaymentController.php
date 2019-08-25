@@ -81,7 +81,9 @@ class PaymentController extends Controller
     {
         // TODO, sent to splitwise
         $payments = $request->get('payments', []);
-        $friendId = 4050136;
+        //
+        $me = 11349723;
+        $friendId = 4050136; // Sima
 
         foreach ($payments as $paymentId => $payment) {
 
@@ -94,13 +96,23 @@ class PaymentController extends Controller
 
             try {
                 $client = new GuzzleClient([
-                    //                    'base_uri' => config('splitwise.base_uri'),
                     'base_uri' => config('splitwise.base_uri'),
                 ]);
 
                 $response = $client->post('create_expense', [
                     'json'    => [
-                        'user_id'     => $friendId,
+                        //                        currency_code: "UYU",
+                        //                        group_id: 987675,
+                        //                        users: [
+                        //                          %{id: 12345, paid_share: 100, owed_share: 0},
+                        //                          %{id: 23456, paid_share: 0, owed_share: 100},
+                        //                        ],
+                        //                        category_id: 18,
+                        'users'       => [
+                            ['id' => $me, 'paid_share' => $payment['value'], 'owed_share' => 0],
+                            ['id' => $friendId, 'paid_share' => 0, 'owed_share' => $payment['value']],
+                        ],
+                        'payment'     => true,
                         'description' => $payment['description'],
                         'cost'        => $payment['value'],
                     ],
