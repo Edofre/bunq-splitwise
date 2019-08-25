@@ -22,7 +22,7 @@ class FriendController extends Controller
     /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function list()
+    public function index()
     {
         try {
             $client = new GuzzleClient([
@@ -37,7 +37,7 @@ class FriendController extends Controller
 
             $response = $response->getBody()->getContents();
 
-            return view('splitwise.friends.list')->with([
+            return view('splitwise.friends.index')->with([
                 'friends' => collect(json_decode($response)->friends),
             ]);
         } catch (\Exception $exception) {
@@ -72,6 +72,5 @@ class FriendController extends Controller
             \Log::channel('splitwise')->error('Could not find friend', ['exception' => $exception]);
             abort(404, __('splitwise.friend_not_found'));
         }
-
     }
 }

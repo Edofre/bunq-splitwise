@@ -20,22 +20,57 @@ class GroupController extends Controller
     }
 
     /**
-     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function list()
+    public function index()
     {
-        $client = new GuzzleClient([
-            'base_uri' => config('splitwise.base_uri'),
-        ]);
+        try {
+            $client = new GuzzleClient([
+                'base_uri' => config('splitwise.base_uri'),
+            ]);
 
-        $response = $client->post('get_groups', [
-            'headers' => [
-                'Authorization' => 'Bearer ' . decrypt(auth()->user()->splitwise_token),
-            ],
-        ]);
+            $response = $client->post('get_groups', [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . decrypt(auth()->user()->splitwise_token),
+                ],
+            ]);
 
-        $response = $response->getBody()->getContents();
-        var_dump(json_decode($response));
-        exit;
+            $response = $response->getBody()->getContents();
+
+            return view('splitwise.groups.index')->with([
+                'groups' => collect(json_decode($response)->groups),
+            ]);
+        } catch (\Exception $exception) {
+            \Log::channel('splitwise')->error('Could not list groups', ['exception' => $exception]);
+            abort(500, $exception->getMessage());
+        }
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function show($id)
+    {
+        try {
+            $client = new GuzzleClient([
+                'base_uri' => config('splitwise.base_uri'),
+            ]);
+
+            $response = $client->post("get_group/{$id}", [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . decrypt(auth()->user()->splitwise_token),
+                ],
+            ]);
+            $response = $response->getBody()->getContents();
+
+            return view('splitwise.groups.show')->with([
+                'group' => json_decode($response)->group,
+            ]);
+
+        } catch (\Exception $exception) {
+            \Log::channel('splitwise')->error('Could not find group', ['exception' => $exception]);
+            abort(404, __('splitwise.group_not_found'));
+        }
     }
 }

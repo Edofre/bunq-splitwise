@@ -5,21 +5,25 @@
         <div class="row justify-content-center">
             <div class="col-md-10">
                 <div class="card">
-                    <div class="card-header">{{ __('splitwise.friends') }}</div>
+                    <div class="card-header">
+                        <i class="fas fa-users"></i>
+                        {{ __('splitwise.groups') }}
+                    </div>
 
                     <div class="card-body">
-                        @forelse($friends as $friend)
+                        @forelse($groups as $group)
                             <div class="media">
-                                <img src="{{ $friend->picture->medium }}" class="mr-3" alt="{{ $friend->first_name }}">
+                                <img src="{{ $group->avatar->medium }}" class="mr-3" alt="{{ $group->name }}">
                                 <div class="media-body">
                                     <h5 class="mt-0">
-                                        <a href="{{ route('splitwise.friends.show', ['id' => $friend->id]) }}">{{ $friend->email }}</a>
+                                        <a href="{{ route('splitwise.groups.show', ['id' => $group->id]) }}">
+                                            {{ $group->name }}
+                                        </a>
                                     </h5>
-                                    @price($friend->balance[0]->amount)
                                 </div>
                             </div>
                         @empty
-                            {{ __('splitwise.no_friends_found') }}
+                            {{ __('splitwise.no_groups_found') }}
                         @endforelse
                     </div>
                 </div>

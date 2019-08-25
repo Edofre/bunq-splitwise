@@ -94,15 +94,15 @@ class PaymentController extends Controller
 
             try {
                 $client = new GuzzleClient([
+                    //                    'base_uri' => config('splitwise.base_uri'),
                     'base_uri' => config('splitwise.base_uri'),
                 ]);
 
                 $response = $client->post('create_expense', [
                     'json'    => [
-                        'payment' => '',
-                        'friendship_id' => $friendId,
-                        'description'   => $payment['description'],
-                        'cost'          => $payment['value'],
+                        'user_id'     => $friendId,
+                        'description' => $payment['description'],
+                        'cost'        => $payment['value'],
                     ],
                     'headers' => [
                         'Authorization' => 'Bearer ' . decrypt(auth()->user()->splitwise_token),

@@ -83,8 +83,8 @@
                                             </div>
 
                                             <ul class="mt-3">
-                                                <li><a href="{{ route('splitwise.friends.list') }}">{{ __('splitwise.show_friends') }}</a></li>
-                                                <li><a href="{{ route('splitwise.groups.list') }}">{{ __('splitwise.show_groups') }}</a></li>
+                                                <li><a href="{{ route('splitwise.friends.index') }}">{{ __('splitwise.show_friends') }}</a></li>
+                                                <li><a href="{{ route('splitwise.groups.index') }}">{{ __('splitwise.show_groups') }}</a></li>
                                                 <li><a href="{{ route('splitwise.users.current') }}">{{ __('splitwise.show_current_user') }}</a></li>
                                             </ul>
                                         @endif
