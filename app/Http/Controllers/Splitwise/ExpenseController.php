@@ -64,6 +64,9 @@ class ExpenseController extends Controller
             ]);
             $response = $response->getBody()->getContents();
 
+            dd(json_decode($response)->expense);
+            exit;
+
             return view('splitwise.expenses.show')->with([
                 'expense' => json_decode($response)->expense,
             ]);

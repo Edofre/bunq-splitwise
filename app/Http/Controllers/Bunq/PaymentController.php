@@ -16,6 +16,16 @@ use Yajra\DataTables\DataTables;
 class PaymentController extends Controller
 {
     /**
+     * Create a new controller instance.
+     * @return void
+     * @throws \Exception
+     */
+    public function __construct()
+    {
+
+    }
+
+    /**
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
@@ -99,24 +109,37 @@ class PaymentController extends Controller
                     'base_uri' => config('splitwise.base_uri'),
                 ]);
 
-                $response = $client->post('create_expense', [
-                    'json'    => [
-                        //                        currency_code: "UYU",
-                        //                        group_id: 987675,
-                        //                        users: [
-                        //                          %{id: 12345, paid_share: 100, owed_share: 0},
-                        //                          %{id: 23456, paid_share: 0, owed_share: 100},
-                        //                        ],
-                        //                        category_id: 18,
-                        'users'       => [
-                            ['id' => $me, 'paid_share' => $payment['value'], 'owed_share' => 0],
-                            ['id' => $friendId, 'paid_share' => 0, 'owed_share' => $payment['value']],
-                        ],
-                        'payment'     => true,
-                        'description' => $payment['description'],
-                        'cost'        => $payment['value'],
+                // Get values, split value in two for both parties
+                $splitValue = abs(round($payment['value'] / 2, 2));
+                $value = $splitValue * 2;
+
+                var_dump($value);
+                var_dump($splitValue);
+
+                $data = [
+                    //                        group_id: 987675,
+                    //                        users: [
+                    //                          %{id: 12345, paid_share: 100, owed_share: 0},
+                    //                          %{id: 23456, paid_share: 0, owed_share: 100},
+                    //                        ],
+                    //                        category_id: 18,
+
+                    'currency_code' => "EUR",
+                    // NOPE
+                    'users'         => [
+                        ['user_id' => $me, 'paid_share' => $value, 'owed_share' => $splitValue],
+                        ['user_id' => $friendId, 'paid_share' => 0, 'owed_share' => $splitValue],
                     ],
-                    'headers' => [
+                    'payment'       => false,
+                    'cost'          => $value,
+                    'description'   => $payment['description'],
+                ];
+
+                var_dump($data);
+
+                $response = $client->post('create_expense', [
+                    'form_params' => $data,
+                    'headers'     => [
                         'Authorization' => 'Bearer ' . decrypt(auth()->user()->splitwise_token),
                     ],
                 ]);
