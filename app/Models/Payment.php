@@ -62,12 +62,16 @@ class Payment extends Model
     {
         $description = $this->description;
 
-        // We always show albert with the date
+        // We always show Albert with the date
         if (Str::startsWith($description, 'ALBERT')) {
             return 'Albert ' . $this->payment_at->format('d-m');
         }
 
-
+        // We always show Billa with the date
+        if (Str::startsWith($description, 'Billa')) {
+            return 'Billa ' . $this->payment_at->format('d-m');
+        }
+        
         return $description . ' ' . $this->payment_at->format('d-m');
     }
 }
