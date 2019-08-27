@@ -31,6 +31,8 @@ return [
 
     // Expenses
     'show_expenses'                   => 'Show expenses',
+    'payments_sent'                   => 'Payments sent!',
+    'could_not_fetch_user'            => 'Could not fetch user, expenses not sent!',
 
     // Flash messages
     'flash_oauth_error'               => 'Could not connect to Splitwise, error that occurred was: :error',

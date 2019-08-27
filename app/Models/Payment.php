@@ -71,7 +71,7 @@ class Payment extends Model
         if (Str::startsWith($description, 'Billa')) {
             return 'Billa ' . $this->payment_at->format('d-m');
         }
-        
+
         return $description . ' ' . $this->payment_at->format('d-m');
     }
 }

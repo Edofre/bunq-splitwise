@@ -65,6 +65,7 @@ class PaymentController extends Controller
         // Create a date from the given year & month
         $date = Carbon::create($year, $month);
 
+        // Query our payments to get the requested date
         $query = Payment::query()
             ->where('payment_at', '>=', $date->startOfMonth()->format('Y-m-d'))
             ->where('payment_at', '<=', $date->endOfMonth()->format('Y-m-d'));
@@ -92,11 +93,39 @@ class PaymentController extends Controller
     {
         $payments = $request->get('payments', []);
 
-        // Dispatch the job that will send the payments
-        SendPayments::dispatch($payments);
+        // Get current user
+        $user = $this->getCurrentUser();
 
-        flash(__('splitwise.payments sent'))->success();
+        if (!is_null($user)) {
+            // Dispatch the job that will send the payments
+            SendPayments::dispatch($user->id, $payments);
+            flash(__('splitwise.payments_sent'))->success();
+        } else {
+            flash(__('splitwise.could_not_fetch_user'))->error();
+
+        }
         return redirect()->route('bunq.payments.filter');
+    }
+
+    /**
+     * @return object|null
+     */
+    private function getCurrentUser()
+    {
+        $client = new GuzzleClient([
+            'base_uri' => config('splitwise.base_uri'),
+        ]);
+
+        $response = $client->post('get_current_user', [
+            'headers' => [
+                'Authorization' => 'Bearer ' . decrypt(auth()->user()->splitwise_token),
+            ],
+        ]);
+
+        $response = json_decode($response->getBody()->getContents());
+
+        // Return the user if it's set, otherwise null
+        return $response->user ?? null;
     }
 
     /**

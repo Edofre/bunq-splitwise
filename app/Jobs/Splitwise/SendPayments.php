@@ -24,12 +24,16 @@ class SendPayments implements ShouldQueue
     /** @var array */
     private $payments;
 
+    private $userId;
+
     /**
      * Create a new job instance.
-     * @param array $payments
+     * @param integer $userId
+     * @param array   $payments
      */
-    public function __construct($payments)
+    public function __construct($userId, $payments)
     {
+        $this->userId = $userId;
         $this->payments = $payments;
     }
 
@@ -39,9 +43,6 @@ class SendPayments implements ShouldQueue
      */
     public function handle()
     {
-        // Get user details (for now hardcoded)
-        $me = 11349723; // Edo
-
         foreach ($this->payments as $paymentId => $payment) {
             $paymentModel = Payment::find($paymentId);
 
@@ -57,7 +58,7 @@ class SendPayments implements ShouldQueue
                 $data = [
                     'currency_code' => "EUR",
                     'users'         => [
-                        ['user_id' => $me, 'paid_share' => $value, 'owed_share' => $splitValue],
+                        ['user_id' => $this->userId, 'paid_share' => $value, 'owed_share' => $splitValue],
                         ['user_id' => self::SPLITWISE_FRIEND_USER_ID, 'paid_share' => 0, 'owed_share' => $splitValue],
                     ],
                     'payment'       => false,
