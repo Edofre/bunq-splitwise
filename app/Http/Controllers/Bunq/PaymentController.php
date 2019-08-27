@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Bunq;
 
 use App\Http\Requests\Bunq\Payments\FilterRequest;
 use App\Http\Requests\Bunq\Payments\ProcessRequest;
+use App\Jobs\Splitwise\SendPayments;
 use App\Models\Payment;
 use Carbon\Carbon;
 use GuzzleHttp\Client as GuzzleClient;
@@ -91,56 +92,8 @@ class PaymentController extends Controller
     {
         $payments = $request->get('payments', []);
 
-        // Get user details (for now hardcoded)
-        $me = 11349723; // Edo
-        $friendId = 4050136; // Sima
-
-        foreach ($payments as $paymentId => $payment) {
-            $paymentModel = Payment::find($paymentId);
-
-            try {
-                $client = new GuzzleClient([
-                    'base_uri' => config('splitwise.base_uri'),
-                ]);
-
-                // Get values, split value in two for both parties
-                $splitValue = abs(round($payment['value'] / 2, 2));
-                $value = $splitValue * 2;
-
-                $data = [
-                    'currency_code' => "EUR",
-                    'users'         => [
-                        ['user_id' => $me, 'paid_share' => $value, 'owed_share' => $splitValue],
-                        ['user_id' => $friendId, 'paid_share' => 0, 'owed_share' => $splitValue],
-                    ],
-                    'payment'       => false,
-                    'cost'          => $value,
-                    'description'   => $payment['description'],
-                ];
-
-                // Create the expense @ Splitwise
-                $response = $client->post('create_expense', [
-                    'form_params' => $data,
-                    'headers'     => [
-                        'Authorization' => 'Bearer ' . decrypt(auth()->user()->splitwise_token),
-                    ],
-                ]);
-
-                $response = json_decode($response->getBody()->getContents());
-                // Get our created expense
-                $expense = $response->expenses[0] ?? null;
-
-                if (!is_null($expense)) {
-                    $paymentModel->update([
-                       'splitwise_id' => $expense->id
-                    ]);
-                } else {
-                    \Log::channel('splitwise')->error('Could not create expense', ['response' => $response]);
-                }
-            } catch (\Exception $exception) {
-                \Log::channel('splitwise')->error('Could not create expense', ['exception' => $exception]);
-            }
-        }
+        // Dispatch the job that will send the payments
+        SendPayments::dispatch($payments);
 
         flash(__('splitwise.payments sent'))->success();
         return redirect()->route('bunq.payments.filter');

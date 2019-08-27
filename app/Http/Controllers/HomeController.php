@@ -25,8 +25,6 @@ class HomeController extends Controller
     {
         $user = auth()->user();
 
-        return redirect()->route('bunq.payments.filter');
-
         return view('home')->with([
             'bunqToken'      => $user->bunq_token,
             'splitwiseToken' => $user->splitwise_token,
