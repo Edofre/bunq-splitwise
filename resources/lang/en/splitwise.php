@@ -29,6 +29,9 @@ return [
     // User
     'show_current_user'               => 'Show current user',
 
+    // Expenses
+    'show_expenses'                   => 'Show expenses',
+
     // Flash messages
     'flash_oauth_error'               => 'Could not connect to Splitwise, error that occurred was: :error',
     'flash_successfully_connected'    => 'Successfully connected to Splitwise!',

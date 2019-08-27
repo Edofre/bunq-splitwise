@@ -89,20 +89,14 @@ class PaymentController extends Controller
      */
     public function process(ProcessRequest $request)
     {
-        // TODO, sent to splitwise
         $payments = $request->get('payments', []);
-        //
-        $me = 11349723;
+
+        // Get user details (for now hardcoded)
+        $me = 11349723; // Edo
         $friendId = 4050136; // Sima
 
         foreach ($payments as $paymentId => $payment) {
-
-            var_dump($paymentId);
-            var_dump($payment);
-
             $paymentModel = Payment::find($paymentId);
-            var_dump($paymentModel->getAttributes());
-            echo '<hr/>';
 
             try {
                 $client = new GuzzleClient([
@@ -113,19 +107,8 @@ class PaymentController extends Controller
                 $splitValue = abs(round($payment['value'] / 2, 2));
                 $value = $splitValue * 2;
 
-                var_dump($value);
-                var_dump($splitValue);
-
                 $data = [
-                    //                        group_id: 987675,
-                    //                        users: [
-                    //                          %{id: 12345, paid_share: 100, owed_share: 0},
-                    //                          %{id: 23456, paid_share: 0, owed_share: 100},
-                    //                        ],
-                    //                        category_id: 18,
-
                     'currency_code' => "EUR",
-                    // NOPE
                     'users'         => [
                         ['user_id' => $me, 'paid_share' => $value, 'owed_share' => $splitValue],
                         ['user_id' => $friendId, 'paid_share' => 0, 'owed_share' => $splitValue],
@@ -135,8 +118,7 @@ class PaymentController extends Controller
                     'description'   => $payment['description'],
                 ];
 
-                var_dump($data);
-
+                // Create the expense @ Splitwise
                 $response = $client->post('create_expense', [
                     'form_params' => $data,
                     'headers'     => [
@@ -144,24 +126,24 @@ class PaymentController extends Controller
                     ],
                 ]);
 
-                $response = $response->getBody()->getContents();
+                $response = json_decode($response->getBody()->getContents());
+                // Get our created expense
+                $expense = $response->expenses[0] ?? null;
 
-                var_dump($response);
-                exit;
-
+                if (!is_null($expense)) {
+                    $paymentModel->update([
+                       'splitwise_id' => $expense->id
+                    ]);
+                } else {
+                    \Log::channel('splitwise')->error('Could not create expense', ['response' => $response]);
+                }
             } catch (\Exception $exception) {
-
-                var_dump($exception);
-                exit;
-
-
-                \Log::channel('splitwise')->error('Could not create payment', ['exception' => $exception]);
+                \Log::channel('splitwise')->error('Could not create expense', ['exception' => $exception]);
             }
         }
 
-
-        var_dump('eind');
-        exit;
+        flash(__('splitwise.payments sent'))->success();
+        return redirect()->route('bunq.payments.filter');
     }
 
     /**
