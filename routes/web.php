@@ -12,12 +12,7 @@
 */
 
 Route::get('/', function () {
-
-    if (!auth()->guest()) {
-        return redirect()->to('home');
-    }
-
-    return view('welcome');
+    return redirect()->to('home');
 });
 
 // Authorization routes
