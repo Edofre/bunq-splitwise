@@ -19,7 +19,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
-
     // Home
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -56,13 +55,6 @@ Route::group(['middleware' => ['auth']], function () {
             ->name('payments.process');
         Route::get('/payments/{payment}', 'Bunq\PaymentController@show')
             ->name('payments.show');
-
-
-        // TODO
-        //        Route::get('/monetary-accounts/{monetaryAccountId}/payments/week/{week}/{year}', 'Bunq\PaymentController@week')
-        //            ->name('monetary-accounts.payments.week');
-        //        Route::get('/monetary-accounts/{monetaryAccountId}/payments/month/{month}/{year}', 'Bunq\PaymentController@month')
-        //            ->name('monetary-accounts.payments.year');
     });
 
     Route::group(['prefix' => 'splitwise', 'as' => 'splitwise.'], function () {
