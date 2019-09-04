@@ -11,7 +11,7 @@
                     </div>
 
                     <div class="card-body">
-                        <bunq-accounts/>
+                        <bunq-monetary-accounts/>
                     </div>
                 </div>
             </div>
