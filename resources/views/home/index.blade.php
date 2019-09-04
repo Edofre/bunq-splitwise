@@ -27,8 +27,6 @@
                                                 <i class="fas fa-piggy-bank"></i>
                                                 Authorize bunq
                                             </a>
-
-
                                         @else
                                             <div data-bunq-disconnect-button class="btn btn-success">
                                                 <i class="fa fa-check" aria-hidden="true"></i>
