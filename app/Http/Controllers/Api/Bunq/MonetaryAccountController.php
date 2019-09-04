@@ -11,7 +11,7 @@ use bunq\Model\Generated\Endpoint\MonetaryAccount;
 class MonetaryAccountController extends Controller
 {
     /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
