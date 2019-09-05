@@ -1861,19 +1861,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      monetaryAccounts: [{
-        id: 1,
-        description: 'Main',
-        balance: 1234.56
-      }, {
-        id: 2,
-        description: 'Savings',
-        balance: 15000.00
-      }, {
-        id: 3,
-        description: 'Travel',
-        balance: 0.50
-      }]
+      monetaryAccounts: [// {id: 1, description: 'Main', balance: 1234.56},
+        // {id: 2, description: 'Savings', balance: 15000.00},
+        // {id: 3, description: 'Travel', balance: 0.50},
+      ]
     };
   },
   methods: {
