@@ -12,11 +12,11 @@ return [
      * ],
      */
     'messages' => [
-        'bunq'
+        'bunq',
     ],
 
     /*
      * The default path to use for the generated javascript.
      */
-    'path'     => public_path('js/data/messages.json'),
+    'path'     => resource_path('assets/js/data/messages.json'),
 ];

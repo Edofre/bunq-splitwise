@@ -1,7 +1,6 @@
 <template>
-    <ul class="list-group">
+    <ul v-if="monetaryAccounts.length > 0" class="list-group">
         <li
-                v-if="monetaryAccounts.length > 0"
                 v-for="monetaryAccount in monetaryAccounts"
                 @click="selectAccount(monetaryAccount)"
                 class="list-group-item d-flex justify-content-between align-items-center cursor-pointer">
@@ -10,12 +9,10 @@
                 {{ monetaryAccount.balance }}
             </span>
         </li>
-
-        <li v-else class="list-group-item d-flex justify-content-between align-items-center">
-            'bunq.no_monetary_accounts_found'
-        </li>
-
     </ul>
+    <div v-else>
+        {{ 'bunq.no_monetary_accounts_found' | translate }}
+    </div>
 </template>
 
 <script>

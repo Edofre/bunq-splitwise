@@ -26,6 +26,9 @@ Vue.component('bunq-monetary-accounts', require('./components/Bunq/MonetaryAccou
 
 // Splitwise components
 
+// Import filters
+require('./filters/translate');
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
