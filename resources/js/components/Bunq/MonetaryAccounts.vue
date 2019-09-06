@@ -18,12 +18,11 @@
 <script>
     export default {
         data() {
-            return {
-                monetaryAccounts: [
-                    // {id: 1, description: 'Main', balance: 1234.56},
-                    // {id: 2, description: 'Savings', balance: 15000.00},
-                    // {id: 3, description: 'Travel', balance: 0.50},
-                ]
+            return {}
+        },
+        computed: {
+            monetaryAccounts() {
+                return this.$store.getters.monetaryAccounts
             }
         },
         methods: {

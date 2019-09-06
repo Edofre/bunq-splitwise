@@ -18,20 +18,16 @@ class MonetaryAccountController extends Controller
      */
     public function index()
     {
-        $monetaryAccountList = collect(MonetaryAccount::listing()->getValue());
+        return view('bunq.monetary-accounts.index');
+    }
 
-        //        // Debug
-        //        foreach ($monetaryAccountList as $monetaryAccount) {
-        //            var_dump($monetaryAccount);
-        //            var_dump($monetaryAccount->getReferencedObject()->getId());
-        //            var_dump($monetaryAccount->getReferencedObject()->getDescription());
-        //            var_dump($monetaryAccount->getReferencedObject()->getBalance()->getValue());
-        //            echo '<hr/><hr/>';
-        //        }
-        //        exit;
-
-        return view('bunq.monetary-accounts.index')->with([
-            'monetaryAccounts' => $monetaryAccountList,
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function monetaryAccounts()
+    {
+        return response()->json([
+            'monetaryAccounts' => MonetaryAccount::listing()->getValue(),
         ]);
     }
 
