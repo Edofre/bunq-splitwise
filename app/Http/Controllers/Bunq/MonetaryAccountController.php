@@ -26,8 +26,19 @@ class MonetaryAccountController extends Controller
      */
     public function monetaryAccounts()
     {
+        $monetaryAccounts = collect(MonetaryAccount::listing()->getValue());
+
+        // TODO, fractal?
+        $monetaryAccounts->transform(function ($monetaryAccount) {
+            return [
+                'id'          => $monetaryAccount->getReferencedObject()->getId(),
+                'description' => $monetaryAccount->getReferencedObject()->getDescription(),
+                'balance'     => $monetaryAccount->getReferencedObject()->getBalance()->getValue(),
+            ];
+        });
+
         return response()->json([
-            'monetaryAccounts' => MonetaryAccount::listing()->getValue(),
+            'monetaryAccounts' => $monetaryAccounts,
         ]);
     }
 

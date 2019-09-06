@@ -19,18 +19,25 @@ const mutations = {
     [types.MUTATE_MONETARY_ACCOUNTS]: (state, monetaryAccounts) => {
         state.monetaryAccounts = monetaryAccounts
     },
+    [types.MUTATE_LOADING_MONETARY_ACCOUNTS]: (state, loadingMonetaryAccounts) => {
+        state.loadingMonetaryAccounts = loadingMonetaryAccounts
+    },
 }
 
 const actions = {
     [types.GET_MONETARY_ACCOUNTS]: ({commit}) => {
+        commit(types.MUTATE_LOADING_MONETARY_ACCOUNTS, true);
         axios
-            .get('/monetary-accounts/')
+            .get('/bunq/monetary-accounts/data')
             .then(res => {
                 // Commit our data
-                commit(types.MUTATE_MONETARY_ACCOUNTS, res.data)
+                commit(types.MUTATE_MONETARY_ACCOUNTS, res.data.monetaryAccounts)
             })
             .catch(error => {
                 console.log(error)
+            })
+            .finally(() => {
+                commit(types.MUTATE_LOADING_MONETARY_ACCOUNTS, false)
             })
     }
 }

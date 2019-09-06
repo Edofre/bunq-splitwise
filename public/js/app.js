@@ -1838,6 +1838,7 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store_types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../store/types */ "./resources/js/store/types.js");
 //
 //
 //
@@ -1855,6 +1856,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {};
@@ -1862,12 +1869,18 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     monetaryAccounts: function monetaryAccounts() {
       return this.$store.getters.monetaryAccounts;
+    },
+    loadingMonetaryAccounts: function loadingMonetaryAccounts() {
+      return this.$store.getters.loadingMonetaryAccounts;
     }
   },
   methods: {
     selectAccount: function selectAccount(monetaryAccount) {
       console.log(monetaryAccount);
     }
+  },
+  mounted: function mounted() {
+    this.$store.dispatch(_store_types__WEBPACK_IMPORTED_MODULE_0__["GET_MONETARY_ACCOUNTS"]);
   }
 });
 
@@ -54009,11 +54022,17 @@ var render = function() {
         0
       )
     : _c("div", [
-        _vm._v(
-          "\n    " +
-            _vm._s(_vm._f("translate")("bunq.no_monetary_accounts_found")) +
-            "\n"
-        )
+        _vm.loadingMonetaryAccounts
+          ? _c("div", [_c("i", { staticClass: "fas fa-spinner fa-spin" })])
+          : _c("div", [
+              _vm._v(
+                "\n        " +
+                  _vm._s(
+                    _vm._f("translate")("bunq.no_monetary_accounts_found")
+                  ) +
+                  "\n    "
+              )
+            ])
       ])
 }
 var staticRenderFns = []
@@ -67440,6 +67459,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../types */ "./resources/js/store/types.js");
+var _mutations;
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
@@ -67456,18 +67477,22 @@ var getters = {
     return state.loadingMonetaryAccounts;
   }
 };
-
-var mutations = _defineProperty({}, _types__WEBPACK_IMPORTED_MODULE_1__["MUTATE_MONETARY_ACCOUNTS"], function (state, monetaryAccounts) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, _types__WEBPACK_IMPORTED_MODULE_1__["MUTATE_MONETARY_ACCOUNTS"], function (state, monetaryAccounts) {
   state.monetaryAccounts = monetaryAccounts;
-});
+}), _defineProperty(_mutations, _types__WEBPACK_IMPORTED_MODULE_1__["MUTATE_LOADING_MONETARY_ACCOUNTS"], function (state, loadingMonetaryAccounts) {
+  state.loadingMonetaryAccounts = loadingMonetaryAccounts;
+}), _mutations);
 
 var actions = _defineProperty({}, _types__WEBPACK_IMPORTED_MODULE_1__["GET_MONETARY_ACCOUNTS"], function (_ref) {
   var commit = _ref.commit;
-  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/monetary-accounts/').then(function (res) {
+  commit(_types__WEBPACK_IMPORTED_MODULE_1__["MUTATE_LOADING_MONETARY_ACCOUNTS"], true);
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/bunq/monetary-accounts/data').then(function (res) {
     // Commit our data
-    commit(_types__WEBPACK_IMPORTED_MODULE_1__["MUTATE_MONETARY_ACCOUNTS"], res.data);
+    commit(_types__WEBPACK_IMPORTED_MODULE_1__["MUTATE_MONETARY_ACCOUNTS"], res.data.monetaryAccounts);
   })["catch"](function (error) {
     console.log(error);
+  })["finally"](function () {
+    commit(_types__WEBPACK_IMPORTED_MODULE_1__["MUTATE_LOADING_MONETARY_ACCOUNTS"], false);
   });
 });
 

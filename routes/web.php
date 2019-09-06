@@ -37,6 +37,9 @@ Route::group(['middleware' => ['auth']], function () {
         // Monetary accounts
         Route::get('/monetary-accounts', 'Bunq\MonetaryAccountController@index')
             ->name('monetary-accounts.index');
+        Route::get('/monetary-accounts/data', 'Bunq\MonetaryAccountController@monetaryAccounts')
+            ->name('monetary-accounts.data');
+
         Route::get('/monetary-accounts/{monetaryAccountId}', 'Bunq\MonetaryAccountController@show')
             ->name('monetary-accounts.show');
         Route::any('/monetary-accounts/{monetaryAccountId}/payments/data', 'Bunq\MonetaryAccountController@paymentData')

@@ -11,11 +11,18 @@
         </li>
     </ul>
     <div v-else>
-        {{ 'bunq.no_monetary_accounts_found' | translate }}
+        <div v-if="loadingMonetaryAccounts">
+            <i class="fas fa-spinner fa-spin"></i>
+        </div>
+        <div v-else>
+            {{ 'bunq.no_monetary_accounts_found' | translate }}
+        </div>
     </div>
 </template>
 
 <script>
+    import {GET_MONETARY_ACCOUNTS} from "../../store/types";
+
     export default {
         data() {
             return {}
@@ -23,12 +30,18 @@
         computed: {
             monetaryAccounts() {
                 return this.$store.getters.monetaryAccounts
+            },
+            loadingMonetaryAccounts() {
+                return this.$store.getters.loadingMonetaryAccounts
             }
         },
         methods: {
             selectAccount(monetaryAccount) {
                 console.log(monetaryAccount)
             }
+        },
+        mounted() {
+            this.$store.dispatch(GET_MONETARY_ACCOUNTS)
         }
     }
 </script>
