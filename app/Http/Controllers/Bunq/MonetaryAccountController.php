@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Bunq;
 
 use App\Jobs\Bunq\SyncPayments;
 use App\Models\Payment;
+use App\Transformers\Bunq\MonetaryAccountTransformer;
 use bunq\Model\Generated\Endpoint\MonetaryAccount;
 use Yajra\DataTables\DataTables;
 
@@ -28,18 +29,7 @@ class MonetaryAccountController extends Controller
     {
         $monetaryAccounts = collect(MonetaryAccount::listing()->getValue());
 
-        // TODO, fractal?
-        $monetaryAccounts->transform(function ($monetaryAccount) {
-            return [
-                'id'          => $monetaryAccount->getReferencedObject()->getId(),
-                'description' => $monetaryAccount->getReferencedObject()->getDescription(),
-                'balance'     => $monetaryAccount->getReferencedObject()->getBalance()->getValue(),
-            ];
-        });
-
-        return response()->json([
-            'monetaryAccounts' => $monetaryAccounts,
-        ]);
+        return fractal($monetaryAccounts, new MonetaryAccountTransformer())->respond();
     }
 
     /**
