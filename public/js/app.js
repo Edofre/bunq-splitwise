@@ -1876,7 +1876,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     selectAccount: function selectAccount(monetaryAccount) {
-      console.log(monetaryAccount);
+      window.location.href = route('bunq.monetary-accounts.show', {
+        monetaryAccountId: monetaryAccount.id
+      });
     }
   },
   mounted: function mounted() {
@@ -67486,7 +67488,7 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, _types__WEBPACK_IM
 var actions = _defineProperty({}, _types__WEBPACK_IMPORTED_MODULE_1__["GET_MONETARY_ACCOUNTS"], function (_ref) {
   var commit = _ref.commit;
   commit(_types__WEBPACK_IMPORTED_MODULE_1__["MUTATE_LOADING_MONETARY_ACCOUNTS"], true);
-  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/bunq/monetary-accounts/data').then(function (res) {
+  axios__WEBPACK_IMPORTED_MODULE_0___default.a.get(route('bunq.monetary-accounts.data')).then(function (res) {
     // Commit our data
     commit(_types__WEBPACK_IMPORTED_MODULE_1__["MUTATE_MONETARY_ACCOUNTS"], res.data.data);
   })["catch"](function (error) {

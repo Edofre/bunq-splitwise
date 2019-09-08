@@ -13,6 +13,8 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Allow views to stack styles to the head -->
     @stack('styles')
+    <!-- Ziggy routes so we can use named routes in JS -->
+    @routes
 </head>
 <body>
 <div id="app">

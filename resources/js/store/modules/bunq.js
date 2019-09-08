@@ -28,7 +28,7 @@ const actions = {
     [types.GET_MONETARY_ACCOUNTS]: ({commit}) => {
         commit(types.MUTATE_LOADING_MONETARY_ACCOUNTS, true);
         axios
-            .get('/bunq/monetary-accounts/data')
+            .get(route('bunq.monetary-accounts.data'))
             .then(res => {
                 // Commit our data
                 commit(types.MUTATE_MONETARY_ACCOUNTS, res.data.data)
