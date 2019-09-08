@@ -82,6 +82,8 @@ class PaymentController extends Controller
         //        $query->whereNotNull('description');
         $query->where('description', '!=', '');
 
+        $query->orderByDesc('payment_at');
+
         return $query->get();
     }
 
