@@ -31,7 +31,7 @@ const actions = {
             .get('/bunq/monetary-accounts/data')
             .then(res => {
                 // Commit our data
-                commit(types.MUTATE_MONETARY_ACCOUNTS, res.data.monetaryAccounts)
+                commit(types.MUTATE_MONETARY_ACCOUNTS, res.data.data)
             })
             .catch(error => {
                 console.log(error)

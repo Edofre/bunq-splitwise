@@ -67488,7 +67488,7 @@ var actions = _defineProperty({}, _types__WEBPACK_IMPORTED_MODULE_1__["GET_MONET
   commit(_types__WEBPACK_IMPORTED_MODULE_1__["MUTATE_LOADING_MONETARY_ACCOUNTS"], true);
   axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('/bunq/monetary-accounts/data').then(function (res) {
     // Commit our data
-    commit(_types__WEBPACK_IMPORTED_MODULE_1__["MUTATE_MONETARY_ACCOUNTS"], res.data.monetaryAccounts);
+    commit(_types__WEBPACK_IMPORTED_MODULE_1__["MUTATE_MONETARY_ACCOUNTS"], res.data.data);
   })["catch"](function (error) {
     console.log(error);
   })["finally"](function () {
