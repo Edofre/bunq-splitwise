@@ -4,7 +4,7 @@
         <div class="form-inline">
             <label class="my-1 mr-2">{{ __('payment.payment_at') }}:</label>
             <span class="mr-sm-2">
-                <strong>{{ $payment->payment_at->format('d-m-Y') }}</strong>
+                <strong>{{ $payment->payment_at->format('d-m-Y H:i:s') }}</strong>
             </span>
 
             <label class="my-1 mr-2">{{ __('payment.counterparty_alias') }}:</label>

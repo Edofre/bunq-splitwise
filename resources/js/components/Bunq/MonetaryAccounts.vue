@@ -38,7 +38,7 @@
         methods: {
             selectAccount(monetaryAccount) {
                 window.location.href = route('bunq.monetary-accounts.show', {monetaryAccountId: monetaryAccount.id})
-                
+
             }
         },
         mounted() {
