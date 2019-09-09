@@ -77,6 +77,16 @@ class Payment extends Model
             return 'Billa ' . $this->payment_at->format('d-m');
         }
 
+        // We always show WWW.CD.CZ/ESHOP with the date
+        if (Str::startsWith($description, 'WWW.CD.CZ/ESHOP')) {
+            return 'CD.CZ ' . $this->payment_at->format('d-m');
+        }
+
+        // We always show NETFLIX.COM with the date
+        if (Str::startsWith($description, 'NETFLIX.COM')) {
+            return 'NETFLIX.COM ' . $this->payment_at->format('d-m');
+        }
+
         return $description . ' ' . $this->payment_at->format('d-m');
     }
 }
