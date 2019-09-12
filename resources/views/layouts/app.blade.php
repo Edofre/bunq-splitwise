@@ -12,8 +12,8 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Allow views to stack styles to the head -->
-    @stack('styles')
-    <!-- Ziggy routes so we can use named routes in JS -->
+@stack('styles')
+<!-- Ziggy routes so we can use named routes in JS -->
     @routes
 </head>
 <body>
@@ -35,6 +35,19 @@
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
+
+                    <!-- Main navigation -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                            <i class="fas fa-piggy-bank"></i>
+                            bunq
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('bunq.monetary-accounts.index') }}">{{ __('bunq.monetary_accounts') }}</a>
+                            <a class="dropdown-item" href="{{ route('bunq.payments.index') }}">{{ __('bunq.payments') }}</a>
+                        </div>
+                    </li>
+
                     <!-- Authentication Links -->
                     @guest
                         <li class="nav-item">
@@ -80,7 +93,7 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}" ></script>
+<script src="{{ asset('js/app.js') }}"></script>
 <!-- Allow views to stack scripts just below the body closing tag -->
 @stack('scripts')
 </body>
