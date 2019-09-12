@@ -19,17 +19,20 @@ return [
     'no_code_set'                     => 'No code set',
 
     // Friends
-    'show_friends'                    => 'Show friends',
     'friends'                         => 'Friends',
+    'show_friends'                    => 'Show friends',
     'no_friends_found'                => 'No friends found :(',
 
     // Groups
+    'groups'                          => 'Groups',
     'show_groups'                     => 'Show groups',
 
     // User
+    'users'                           => 'Users',
     'show_current_user'               => 'Show current user',
 
     // Expenses
+    'expenses'                        => 'Expenses',
     'show_expenses'                   => 'Show expenses',
     'payments_sent'                   => 'Payments sent!',
     'could_not_fetch_user'            => 'Could not fetch user, expenses not sent!',
