@@ -36,15 +36,24 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
 
-                    <!-- Main navigation -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
-                            <i class="fas fa-piggy-bank"></i>
                             bunq
                         </a>
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ route('bunq.monetary-accounts.index') }}">{{ __('bunq.monetary_accounts') }}</a>
                             <a class="dropdown-item" href="{{ route('bunq.payments.index') }}">{{ __('bunq.payments') }}</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+                            Splitwise
+                        </a>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="{{ route('splitwise.friends.index') }}">{{ __('splitwise.show_friends') }}</a>
+                            <a class="dropdown-item" href="{{ route('splitwise.groups.index') }}">{{ __('splitwise.show_groups') }}</a>
+                            <a class="dropdown-item" href="{{ route('splitwise.users.current') }}">{{ __('splitwise.show_current_user') }}</a>
+                            <a class="dropdown-item" href="{{ route('splitwise.expenses.index') }}">{{ __('splitwise.show_expenses') }}</a>
                         </div>
                     </li>
 
