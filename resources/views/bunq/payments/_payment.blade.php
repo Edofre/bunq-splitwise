@@ -2,7 +2,12 @@
 
     <div class="col-md-12">
         <div class="form-inline">
-            <label class="my-1 mr-2">{{ __('payment.payment_at') }}:</label>
+            <label class="my-1 mr-2">
+                @if($payment->sub_type === 'REVERSAL')
+                    !REVERSAL!
+                @endif
+                {{ __('payment.payment_at') }}:
+            </label>
             <span class="mr-sm-2">
                 <strong>{{ $payment->payment_at->format('d-m-Y H:i:s') }}</strong>
             </span>

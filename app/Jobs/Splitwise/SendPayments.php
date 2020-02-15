@@ -43,6 +43,10 @@ class SendPayments implements ShouldQueue
      */
     public function handle()
     {
+//        SELECT * FROM `payments`
+//     WHERE `payment_at` >= '2019-09-15 00:00:00'
+//    AND `payment_at` < '2020-10-01 00:00:00'
+
         foreach ($this->payments as $paymentId => $payment) {
             $paymentModel = Payment::find($paymentId);
 
@@ -70,6 +74,7 @@ class SendPayments implements ShouldQueue
                 $response = $client->post('create_expense', [
                     'form_params' => $data,
                     'headers'     => [
+                        // TODO, fix for queue
                         'Authorization' => 'Bearer ' . decrypt(auth()->user()->splitwise_token),
                     ],
                 ]);
