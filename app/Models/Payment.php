@@ -67,6 +67,11 @@ class Payment extends Model
             return 'Albert ' . $this->payment_at->format('d-m');
         }
 
+        // We always show Albert Heijn with the date
+        if (Str::startsWith($description, 'Albert')) {
+            return 'Albert ' . $this->payment_at->format('d-m');
+        }
+
         // We always show DELMART with the date
         if (Str::startsWith($description, 'DELMART')) {
             return 'Delmart ' . $this->payment_at->format('d-m');
