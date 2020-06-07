@@ -2,6 +2,8 @@
 
 namespace App\Jobs\Bunq;
 
+use bunq\Context\ApiContext;
+use bunq\Context\BunqContext;
 use bunq\Model\Generated\Endpoint\MonetaryAccount;
 use bunq\Model\Generated\Endpoint\Payment;
 use Carbon\Carbon;
@@ -35,6 +37,11 @@ class SyncPayments implements ShouldQueue
     {
         // Store our id for safe keeping
         $this->monetaryAccountId = $monetaryAccountId;
+
+        // Debug
+        // $context = storage_path('bunq/bunq.conf');
+        // $apiContext = ApiContext::restore($context);
+        // BunqContext::loadApiContext($apiContext);
 
         // Let's make sure the monetary accounts exists
         try {

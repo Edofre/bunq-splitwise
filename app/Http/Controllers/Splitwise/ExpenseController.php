@@ -29,7 +29,7 @@ class ExpenseController extends Controller
                 'base_uri' => config('splitwise.base_uri'),
             ]);
 
-            $response = $client->post('get_expenses', [
+            $response = $client->post('get_expenses?limit=50', [
                 'headers' => [
                     'Authorization' => 'Bearer ' . decrypt(auth()->user()->splitwise_token),
                 ],

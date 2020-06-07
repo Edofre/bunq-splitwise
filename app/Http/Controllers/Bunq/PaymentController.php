@@ -23,7 +23,6 @@ class PaymentController extends Controller
      */
     public function __construct()
     {
-
     }
 
     /**
@@ -31,9 +30,7 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        return view('bunq.payments.index')->with([
-
-        ]);
+        return view('bunq.payments.index')->with([]);
     }
 
     /**
@@ -68,7 +65,7 @@ class PaymentController extends Controller
         // Query our payments to get the requested date
         $query = Payment::query()
             ->where('payment_at', '>=', $date->startOfMonth()->format('Y-m-d'))
-            ->where('payment_at', '<=', $date->endOfMonth()->format('Y-m-d'));
+            ->where('payment_at', '<=', $date->addMonth(1)->startOfMonth()->format('Y-m-d'));
 
         // Check if we should hide the payments that have been sent to splitwise
         if ($filterAlreadySent) {
@@ -104,7 +101,6 @@ class PaymentController extends Controller
             flash(__('splitwise.payments_sent'))->success();
         } else {
             flash(__('splitwise.could_not_fetch_user'))->error();
-
         }
         return redirect()->route('bunq.payments.filter');
     }
@@ -168,4 +164,3 @@ class PaymentController extends Controller
         ]);
     }
 }
-

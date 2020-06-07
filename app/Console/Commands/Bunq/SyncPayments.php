@@ -37,6 +37,6 @@ class SyncPayments extends Command
      */
     public function handle()
     {
-        \App\Jobs\Bunq\SyncPayments::dispatch($this->argument('monetaryAccount'));
+        \App\Jobs\Bunq\SyncPayments::dispatchNow($this->argument('monetaryAccount'));
     }
 }
