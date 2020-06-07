@@ -39,9 +39,9 @@ class SyncPayments implements ShouldQueue
         $this->monetaryAccountId = $monetaryAccountId;
 
         // Debug
-        // $context = storage_path('bunq/bunq.conf');
-        // $apiContext = ApiContext::restore($context);
-        // BunqContext::loadApiContext($apiContext);
+        $context = storage_path('bunq/bunq.conf');
+        $apiContext = ApiContext::restore($context);
+        BunqContext::loadApiContext($apiContext);
 
         // Let's make sure the monetary accounts exists
         try {

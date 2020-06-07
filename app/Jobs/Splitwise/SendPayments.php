@@ -24,16 +24,21 @@ class SendPayments implements ShouldQueue
     /** @var array */
     private $payments;
 
-    private $userId;
+    /** @var integer */
+    private $splitwiseUserId;
+    /** @var string */
+    private $splitwiseUserToken;
 
     /**
      * Create a new job instance.
      * @param integer $userId
+     * @param string $splitwiseUserToken
      * @param array   $payments
      */
-    public function __construct($userId, $payments)
+    public function __construct(int $splitwiseUserId, string $splitwiseUserToken, $payments)
     {
-        $this->userId = $userId;
+        $this->splitwiseUserId = $splitwiseUserId;
+        $this->splitwiseUserToken = $splitwiseUserToken;
         $this->payments = $payments;
     }
 
@@ -43,9 +48,9 @@ class SendPayments implements ShouldQueue
      */
     public function handle()
     {
-//        SELECT * FROM `payments`
-//     WHERE `payment_at` >= '2019-09-15 00:00:00'
-//    AND `payment_at` < '2020-10-01 00:00:00'
+        // SELECT * FROM `payments`
+        // WHERE `payment_at` >= '2019-09-15 00:00:00'
+        // AND `payment_at` < '2020-10-01 00:00:00'
 
         foreach ($this->payments as $paymentId => $payment) {
             $paymentModel = Payment::find($paymentId);
@@ -74,8 +79,7 @@ class SendPayments implements ShouldQueue
                 $response = $client->post('create_expense', [
                     'form_params' => $data,
                     'headers'     => [
-                        // TODO, fix for queue
-                        'Authorization' => 'Bearer ' . decrypt(auth()->user()->splitwise_token),
+                        'Authorization' => 'Bearer ' . decrypt($this->splitwiseUserToken),
                     ],
                 ]);
 
@@ -95,5 +99,4 @@ class SendPayments implements ShouldQueue
             }
         }
     }
-
 }

@@ -95,9 +95,14 @@ class PaymentController extends Controller
         // Get current user
         $user = $this->getCurrentUser();
 
+        var_dump($user->id);
+        var_dump(auth()->user()->splitwise_token);
+
+        exit;
+
         if (!is_null($user)) {
             // Dispatch the job that will send the payments
-            SendPayments::dispatch($user->id, $payments);
+            SendPayments::dispatch($user->id, auth()->user()->splitwise_token, $payments);
             flash(__('splitwise.payments_sent'))->success();
         } else {
             flash(__('splitwise.could_not_fetch_user'))->error();
