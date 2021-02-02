@@ -15,7 +15,7 @@
     "fideloper/proxy": "^4.0",
     "guzzlehttp/guzzle": "~6.0",
     "laracasts/flash": "^3.0",
-    "laravel/framework": "5.8.*",
+    "laravel/framework": "6.20.*",
     "laravel/tinker": "^1.0",
     "mariuzzo/laravel-js-localization": "^1.4",
     "predis/predis": "^1.1",
