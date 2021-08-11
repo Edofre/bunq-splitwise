@@ -1793,6 +1793,19 @@ cyclist@~0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
 
+datatables.net-bs4@^1.10.16:
+  version "1.10.25"
+  resolved "https://registry.yarnpkg.com/datatables.net-bs4/-/datatables.net-bs4-1.10.25.tgz#4474d6738bf55a25d20da79afe18e1e654cfca42"
+  dependencies:
+    datatables.net "1.10.25"
+    jquery ">=1.7"
+
+datatables.net@1.10.25, datatables.net@^1.10.16:
+  version "1.10.25"
+  resolved "https://registry.yarnpkg.com/datatables.net/-/datatables.net-1.10.25.tgz#fc03a239e08f91d1d64ba101aa54daf4086d162c"
+  dependencies:
+    jquery ">=1.7"
+
 date-now@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/date-now/-/date-now-0.1.4.tgz#eaf439fd4d4848ad74e5cc7dbef200672b9e345b"
@@ -3116,6 +3129,10 @@ isobject@^3.0.0, isobject@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
 
+jquery@>=1.7:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
+
 jquery@^3.2:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
@@ -3200,6 +3217,10 @@ kind-of@^5.0.0:
 kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
+
+lang.js@^1.1.14:
+  version "1.1.14"
+  resolved "https://registry.yarnpkg.com/lang.js/-/lang.js-1.1.14.tgz#96329c064c18f8d5e1299d79d827a368af08c710"
 
 laravel-mix@^4.0.7:
   version "4.1.2"
@@ -4044,8 +4065,8 @@ path-key@^2.0.0, path-key@^2.0.1:
   resolved "https://registry.yarnpkg.com/path-key/-/path-key-2.0.1.tgz#411cadb574c5a140d3a4b1910d40d80cc9f40b40"
 
 path-parse@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.7.tgz#fbc114b60ca42b30d9daf5858e4bd68bbedb6735"
 
 path-to-regexp@0.1.7:
   version "0.1.7"
@@ -5556,6 +5577,10 @@ vue-template-es2015-compiler@^1.9.0:
 vue@^2.5.17:
   version "2.6.10"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
+
+vuex@^3.1.1:
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.6.2.tgz#236bc086a870c3ae79946f107f16de59d5895e71"
 
 watchpack@^1.6.0:
   version "1.6.0"
